@@ -1,4 +1,23 @@
 ---
-import site from '../data/site.json'; const base=import.meta.env.BASE_URL;
+import site from '../data/site.json';
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 ---
-<header><a class="brand" href={base}><span class="logo"><img src={`${base}logo.png`} alt="Brian Fernandes logo"/></span><span><b>{site.name}</b><small>Design Engineer</small></span></a><nav><a href={`${base}#work`}>Work</a><a href={`${base}about`}>About</a><a href={`${base}contact`}>Contact</a><a href={`${base}resources`}>Resources</a><a href={`${base}resume`}>Résumé</a></nav><button class="menu-btn" aria-label="Open menu">☰</button><div class="mobile-nav"><a href={`${base}#work`}>Work</a><a href={`${base}about`}>About</a><a href={`${base}contact`}>Contact</a><a href={`${base}resources`}>Resources</a><a href={`${base}resume`}>Résumé</a></div></header>
+<header>
+<a class="brand" href={base}><span class="logo"><img src={`${base}logo.png`} alt="Brian Fernandes logo"/></span><span><b>{site.name}</b><small>Design Engineer</small></span></a>
+<nav>
+{`${base}#work`}Work</a>
+{`${base}about/`}About</a>
+<a href={`${base}contact/t</a>
+<a href={`${base}resources/`es</a>
+<a${base}resume/`}Résumé</a>
+</nav>
+<button class="menu-btn" aria-label="Open menu">☰</button>
+<div class="mobile-nav">
+<a href={`${base}#work`}>Work<{base}about/`}About</a>
+{`${base}contact/`}Contact</a>>
+{`${base}resources/`}Resources</a>
+{`${base}resume/`}Résumé</a>
+</div>
+</header>
