@@ -1,0 +1,4 @@
+---
+import Base from '../layouts/BaseLayout.astro';import about from '../data/about.json';
+---
+<Base title="About | Brian Fernandes"><section class="wrap"><p class="eyebrow">{about.eyebrow}</p><h1 class="page-title">{about.title}<br/><em>{about.accent}</em></h1><p class="body-copy">{about.body}</p></section><section class="wrap about-grid"><div class="portrait"></div><div><h2>Experience</h2>{about.experience.map(x=><article class="experience"><b>{x.period}</b><h3>{x.role}</h3><small>{x.company}</small><p class="body-copy">{x.detail}</p></article>)}</div></section></Base>

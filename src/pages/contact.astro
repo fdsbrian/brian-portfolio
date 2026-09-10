@@ -1,0 +1,4 @@
+---
+import Base from '../layouts/BaseLayout.astro';import site from '../data/site.json';
+---
+<Base title="Contact | Brian Fernandes"><section class="wrap"><p class="eyebrow">Contact / Collaboration</p><h1 class="page-title">Let's make complexity<br/><em>feel simple.</em></h1></section><section class="wrap contact-grid"><a class="contact-card" href={`mailto:${site.email}`}><span>Start a conversation</span><h2>{site.email} ↗</h2></a><div class="cards" style="grid-template-columns:1fr"><a class="card" href={site.linkedin}>LinkedIn ↗</a><a class="card" href={site.github}>GitHub ↗</a><div class="card"><b>{site.availability}</b></div></div></section></Base>

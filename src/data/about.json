@@ -1,0 +1,20 @@
+{
+  "eyebrow": "Profile / Experience",
+  "title": "Curious by nature.",
+  "accent": "Precise by practice.",
+  "body": "I work across product strategy, interface design and implementation thinking, with experience in enterprise platforms and complex workflows.",
+  "experience": [
+    {
+      "period": "Present",
+      "role": "Senior User Interface Design Engineer",
+      "company": "Enterprise Technology Team",
+      "detail": "Designing user-centered platforms, interfaces and technical documentation."
+    },
+    {
+      "period": "Previously",
+      "role": "UI/UX Designer and Frontend Specialist",
+      "company": "Digital Products",
+      "detail": "Created responsive interfaces, reusable components and prototypes."
+    }
+  ]
+}

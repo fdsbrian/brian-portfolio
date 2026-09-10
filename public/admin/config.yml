@@ -1,0 +1,60 @@
+backend:
+  name: github
+  repo: fdsbrian/brian-portfolio
+  branch: main
+  base_url: https://YOUR-OAUTH-SERVICE.example.com
+
+local_backend: true
+media_folder: public/uploads
+public_folder: /uploads
+publish_mode: editorial_workflow
+
+collections:
+  - name: projects
+    label: Projects
+    folder: src/content/projects
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Category, name: category, widget: string }
+      - { label: Year, name: year, widget: string }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Cover Image, name: cover, widget: image, required: false }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Order, name: order, widget: number, default: 0 }
+      - { label: Challenge, name: challenge, widget: text }
+      - { label: Approach, name: approach, widget: text }
+      - { label: Outcome, name: outcome, widget: text }
+      - { label: Body, name: body, widget: markdown, required: false }
+  - name: resources
+    label: Resources
+    folder: src/content/resources
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Type, name: type, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Order, name: order, widget: number, default: 0 }
+      - { label: Body, name: body, widget: markdown, required: false }
+  - name: settings
+    label: Site Settings
+    files:
+      - label: General
+        name: site
+        file: src/data/site.json
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Role, name: role, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: Hero Line 1, name: heroLine1, widget: string }
+          - { label: Hero Accent, name: heroAccent, widget: string }
+          - { label: Hero Line 2, name: heroLine2, widget: string }
+          - { label: Hero Body, name: heroBody, widget: text }
+          - { label: Email, name: email, widget: string }
+          - { label: Availability, name: availability, widget: string }
+          - { label: Resume PDF, name: resume, widget: file, required: false }
+          - { label: LinkedIn, name: linkedin, widget: string }
+          - { label: GitHub, name: github, widget: string }

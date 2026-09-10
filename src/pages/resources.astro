@@ -1,0 +1,4 @@
+---
+import Base from '../layouts/BaseLayout.astro';import {getCollection} from 'astro:content';const resources=(await getCollection('resources')).filter(x=>x.data.published).sort((a,b)=>a.data.order-b.data.order);
+---
+<Base title="Resources | Brian Fernandes"><section class="wrap"><p class="eyebrow">Resources / Notes / Tools</p><h1 class="page-title">Useful things,<br/><em>shared openly.</em></h1><p class="body-copy">A growing library of templates, guides and practical notes.</p></section><section class="wrap cards">{resources.map(r=><article class="card"><b>{r.data.type}</b><h2>{r.data.title}</h2><p class="body-copy">{r.data.description}</p></article>)}</section></Base>

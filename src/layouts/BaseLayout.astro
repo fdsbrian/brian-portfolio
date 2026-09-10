@@ -1,0 +1,5 @@
+---
+import Header from '../components/Header.astro';import Footer from '../components/Footer.astro';import '../styles/global.css';
+const {title='Brian Fernandes',description='Portfolio of Brian Fernandes'}=Astro.props;
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><meta name="description" content={description}/><meta name="theme-color" content="#090a0d"/><title>{title}</title></head><body><div class="progress"></div><Header/><main><slot/></main><Footer/><script is:inline>const p=document.querySelector('.progress');addEventListener('scroll',()=>p.style.transform=`scaleX(${scrollY/(document.documentElement.scrollHeight-innerHeight)})`);document.querySelector('.menu-btn')?.addEventListener('click',()=>document.querySelector('.mobile-nav')?.classList.toggle('open'));</script></body></html>
