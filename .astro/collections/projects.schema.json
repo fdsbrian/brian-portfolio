@@ -17,6 +17,9 @@
     "cover": {
       "type": "string"
     },
+    "coverAlt": {
+      "type": "string"
+    },
     "featured": {
       "default": false,
       "type": "boolean"

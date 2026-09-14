@@ -11,6 +11,12 @@
     "description": {
       "type": "string"
     },
+    "cover": {
+      "type": "string"
+    },
+    "file": {
+      "type": "string"
+    },
     "published": {
       "default": true,
       "type": "boolean"
