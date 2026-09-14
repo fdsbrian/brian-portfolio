@@ -1,20 +1,82 @@
 {
+  "skills": [
+    {
+      "name": "User Interface Design",
+      "category": "Design",
+      "featured": true
+    },
+    {
+      "name": "User Experience Strategy",
+      "category": "Strategy",
+      "featured": true
+    },
+    {
+      "name": "Design Systems",
+      "category": "Design",
+      "featured": true
+    },
+    {
+      "name": "Figma",
+      "category": "Tools",
+      "featured": true
+    },
+    {
+      "name": "HTML and CSS",
+      "category": "Development",
+      "featured": true
+    },
+    {
+      "name": "JavaScript",
+      "category": "Development",
+      "featured": true
+    },
+    {
+      "name": "Astro",
+      "category": "Development",
+      "featured": false
+    },
+    {
+      "name": "Responsive Design",
+      "category": "Design",
+      "featured": true
+    },
+    {
+      "name": "Accessibility",
+      "category": "Design",
+      "featured": false
+    },
+    {
+      "name": "Interactive Prototyping",
+      "category": "Design",
+      "featured": true
+    },
+    {
+      "featured": false,
+      "name": "Logo Designing",
+      "category": "Design"
+    }
+  ],
+  "body": "My work brings together product thinking, user experience, visual design and technical implementation. I focus on creating enterprise interfaces that are useful, scalable and carefully crafted.",
   "eyebrow": "Profile / Experience",
-  "title": "Curious by nature.",
   "accent": "Precise by practice.",
-  "body": "I work across product strategy, interface design and implementation thinking, with experience in enterprise platforms and complex workflows.",
   "experience": [
     {
       "period": "Present",
       "role": "Senior User Interface Design Engineer",
       "company": "Enterprise Technology Team",
-      "detail": "Designing user-centered platforms, interfaces and technical documentation."
+      "location": "Doha, Qatar",
+      "description": "Designing user-centered enterprise platforms, design systems, interactive prototypes and technical product experiences."
     },
     {
       "period": "Previously",
       "role": "UI/UX Designer and Frontend Specialist",
       "company": "Digital Products",
-      "detail": "Created responsive interfaces, reusable components and prototypes."
+      "location": "Doha, Qatar",
+      "description": "Created responsive interfaces, reusable components and prototypes for web-based digital services."
     }
-  ]
+  ],
+  "profileImage": "",
+  "profileImageAlt": "Portrait of Brian Fernandes",
+  "title": "Curious by nature.",
+  "introduction": "I design user-centered digital products that bring clarity to complex workflows."
 }
