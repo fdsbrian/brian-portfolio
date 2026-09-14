@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Portfolio of Brian Fernandes, a Senior User Interface Design Engineer specializing in enterprise products, design systems and interface engineering."><meta name="theme-color" content="#090a0d"><link rel="canonical" href="https://fdsbrian.github.io/brian-portfolio/"><title>Brian Fernandes | Senior User Interface Design Engineer</title><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Brian Fernandes"><meta property="og:title" content="Brian Fernandes | Senior User Interface Design Engineer"><meta property="og:description" content="Portfolio of Brian Fernandes, a Senior User Interface Design Engineer specializing in enterprise products, design systems and interface engineering."><meta property="og:url" content="https://fdsbrian.github.io/brian-portfolio/"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Brian Fernandes | Senior User Interface Design Engineer"><meta name="twitter:description" content="Portfolio of Brian Fernandes, a Senior User Interface Design Engineer specializing in enterprise products, design systems and interface engineering."><link rel="stylesheet" href="/brian-portfolio/_astro/BaseLayout.Cw8ypBw3.css"></head><body><div class="progress" aria-hidden="true"></div><header><a class="brand" href="/brian-portfolio/"><span class="logo"><img src="/brian-portfolio/logo.png" alt="Brian Fernandes logo"></span><span><b>Brian Fernandes</b><small>Design Engineer</small></span></a><nav><a href="/brian-portfolio/#work/">Work</a><a href="/brian-portfolio/about/">About</a><a href="/brian-portfolio/contact/">Contact</a><a href="/brian-portfolio/resources/">Resources</a><a href="/brian-portfolio/resume/">Résumé</a></nav><button class="menu-btn" aria-label="Open menu">☰</button><div class="mobile-nav"><a href="/brian-portfolio/#work/">Work</a><a href="{base}about/">About</a><a href="/brian-portfolio/contact/">Contact</a><a href="/brian-portfolio/resources/">Resources</a><a href="/brian-portfolio/resume/">Résumé</a></div></header><main><section class="wrap hero"><div class="hero-orb hero-orb-one"></div><div class="hero-orb hero-orb-two"></div><p class="eyebrow hero-eyebrow">Design · Technology · Experience<span>·</span>Senior User Interface Design Engineer<span>·</span>Doha, Qatar</p><h1><span class="hero-line hero-line-one">I design digital</span><span class="hero-line hero-line-two"><em>experiences</em>people enjoy.</span></h1><div class="hero-bottom"><p>Bridging user experience, interface engineering and enterprise delivery to turn complex workflows into clear, elegant products.</p><div class="hero-actions"><a href="#work"><span>View selected work</span><span aria-hidden="true">↗</span></a><a href="/brian-portfolio/about/"><span>About me</span><span aria-hidden="true">→</span></a></div></div><div class="hero-scroll"><span>Scroll to explore</span><i></i></div></section><section id="work" class="wrap work-section"><div class="section-head"><p class="eyebrow">Selected work / 2025–2026</p><h2 class="section-title">Complex products.<br><em>Clear experiences.</em></h2></div><div class="projects"></div></section><div class="marquee" aria-hidden="true"><div>Design systems ✦ Product thinking ✦ Interface engineering ✦ User experience ✦ Design systems ✦ Product thinking ✦ Interface engineering ✦ User experience ✦</div></div><section class="wrap homepage-about"><div class="section-head"><p class="eyebrow">About Brian</p><div><h2 class="section-title">Design precision meets<br><em>technical fluency.</em></h2><p class="body-copy homepage-about-copy">I design user-centered digital products that bring clarity to complex workflows.</p><a href="/brian-portfolio/about/">More about me<span>→</span></a></div></div></section><section class="wrap homepage-skills"><div class="section-head"><p class="eyebrow">Capabilities / Expertise</p><h2 class="section-title">Across strategy,<br><em>design and delivery.</em></h2></div><div class="homepage-skills-grid"><article class="homepage-skill"><span>01</span><div><small>Design</small><h3>User Interface Design</h3></div></article><article class="homepage-skill"><span>02</span><div><small>Strategy</small><h3>User Experience Strategy</h3></div></article><article class="homepage-skill"><span>03</span><div><small>Design</small><h3>Design Systems</h3></div></article><article class="homepage-skill"><span>04</span><div><small>Tools</small><h3>Figma</h3></div></article><article class="homepage-skill"><span>05</span><div><small>Development</small><h3>HTML and CSS</h3></div></article><article class="homepage-skill"><span>06</span><div><small>Development</small><h3>JavaScript</h3></div></article><article class="homepage-skill"><span>07</span><div><small>Design</small><h3>Responsive Design</h3></div></article><article class="homepage-skill"><span>08</span><div><small>Design</small><h3>Interactive Prototyping</h3></div></article></div><a href="/brian-portfolio/about/">View complete capabilities<span>→</span></a></section></main><footer><div class="footer-card"><p class="footer-eyebrow">Have a complex idea?</p><h2>Let's make it feel<br><em>beautifully simple.</em></h2><div class="footer-actions"><a href="mailto:hello@example.com">hello@example.com<span>↗</span></a><div class="footer-links"><a href="https://github.com/fdsbrian" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/brian-portfolio/contact/">Contact →</a></div></div></div><div class="copyright"><span>© 2026 Brian Fernandes</span><span>Senior User Interface Design Engineer · Doha, Qatar</span></div></footer><script>
+      const progress = document.querySelector('.progress');
+
+      const updateProgress = () => {
+        if (!progress) return;
+
+        const availableScroll =
+          document.documentElement.scrollHeight -
+          window.innerHeight;
+
+        const percentage =
+          availableScroll > 0
+            ? window.scrollY / availableScroll
+            : 0;
+
+        progress.style.transform =
+          `scaleX(${percentage})`;
+      };
+
+      window.addEventListener(
+        'scroll',
+        updateProgress,
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'resize',
+        updateProgress,
+        { passive: true }
+      );
+
+      updateProgress();
+
+      const menuButton =
+        document.querySelector('.menu-btn');
+
+      const mobileNavigation =
+        document.querySelector('.mobile-nav');
+
+      menuButton?.addEventListener('click', () => {
+        const isOpen =
+          mobileNavigation?.classList.toggle('open') ?? false;
+
+        menuButton.setAttribute(
+          'aria-expanded',
+          String(isOpen)
+        );
+      });
+
+      mobileNavigation?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileNavigation.classList.remove('open');
+          menuButton?.setAttribute(
+            'aria-expanded',
+            'false'
+          );
+        });
+      });
+    </script></body></html>

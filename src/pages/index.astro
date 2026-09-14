@@ -1,12 +1,263 @@
 ---
 import Base from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
+import about from '../data/about.json';
 import { getCollection } from 'astro:content';
+
 const projects = (await getCollection('projects')).sort(
-(a, b) => a.data.order - b.data.order
+  (a, b) => a.data.order - b.data.order
 );
+
+const resources = (await getCollection('resources'))
+  .filter((resource) => resource.data.published)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const featuredSkills = about.skills
+  .filter((skill) => skill.featured)
+  .slice(0, 8);
+
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 ---
-<Base><section class="wrap hero"><p class="eyebrow">{site.role} · {site.location}</p><h1>{site.heroLine1}<span><em>{site.heroAccent}</em> {site.heroLine2}</span></h1><div class="hero-bottom"><p>{site.heroBody}</p><a class="round-link" href="#work">View work ↗</a></div></section><section id="work" class="wrap"><div class="section-head"><p class="eyebrow">Selected work / 2025–2026</p><h2 class="section-title">Complex products.<br/><em>Clear experiences.</em></h2></div><div class="projects">{projects.map((p)=><a class="project" href={`${base}work/${p.id}/`}><div class="project-art"></div><h2>{p.data.title}</h2><p>{p.data.category} · {p.data.year}</p></a>)}</div></section><div class="marquee"><div>Design systems ✦ Product thinking ✦ Interface engineering ✦ User experience ✦ Design systems ✦ Product thinking ✦ Interface engineering ✦ User experience ✦</div></div><section class="wrap"><div class="section-head"><p class="eyebrow">About Brian</p><div><h2 class="section-title">Design precision meets <em>technical fluency.</em></h2><p class="body-copy">I work across product strategy, interface design and implementation thinking, with experience in enterprise platforms and complex workflows.</p><a href={`${base}about/`}>More about me →</a></div></div></section></Base>
+
+<Base
+  title={site.seoTitle}
+  description={site.seoDescription}
+  image={site.seoImage}
+>
+  <!-- HERO -->
+  <section class="wrap hero">
+    <div class="hero-orb hero-orb-one"></div>
+    <div class="hero-orb hero-orb-two"></div>
+
+    <p class="eyebrow hero-eyebrow">
+      {site.heroEyebrow}
+      <span>·</span>
+      {site.role}
+      <span>·</span>
+      {site.location}
+    </p>
+
+    <h1>
+      <span class="hero-line hero-line-one">
+        {site.heroLine1}
+      </span>
+
+      <span class="hero-line hero-line-two">
+        <em>{site.heroAccent}</em>
+        {site.heroLine2}
+      </span>
+    </h1>
+
+    <div class="hero-bottom">
+      <p>{site.heroBody}</p>
+
+      <div class="hero-actions">
+        <a href="#work">
+          <span>{site.heroPrimaryLabel}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+
+        <a href={`${base}about/`}>
+          <span>{site.heroSecondaryLabel}</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll to explore</span>
+      <i></i>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="work" class="wrap work-section">
+    <div class="section-head">
+      <p class="eyebrow">
+        Selected work / 2025–2026
+      </p>
+
+      <h2 class="section-title">
+        Complex products.
+        <br />
+        <em>Clear experiences.</em>
+      </h2>
+    </div>
+
+    <div class="projects">
+      {
+        projects.map((project, index) => (
+          <a href={`${base}work/${project.id}/`} class="project-card">
+            <div
+              class:list={[
+                'project-art',
+                `project-art-${(index % 3) + 1}`
+              ]}
+            >
+              {
+                project.data.cover ? (
+                  <img
+                    src={project.data.cover}
+                    alt={project.data.title}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                ) : (
+                  <div class="project-placeholder">
+                    <span>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    <small>{project.data.category}</small>
+                  </div>
+                )
+              }
+
+              <span class="magazine-index">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+
+              <span class="project-view">
+                View case study ↗
+              </span>
+            </div>
+
+            <div class="project-meta">
+              <div>
+                <h3>{project.data.title}</h3>
+
+                <p>
+                  {project.data.category}
+                  <span>·</span>
+                  {project.data.year}
+                </p>
+              </div>
+
+              <span class="project-arrow">↗</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- EDITORIAL MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div>
+      Design systems ✦ Product thinking ✦
+      Interface engineering ✦ User experience ✦
+      Design systems ✦ Product thinking ✦
+      Interface engineering ✦ User experience ✦
+    </div>
+  </div>
+
+  <!-- ABOUT PREVIEW -->
+  <section class="wrap homepage-about">
+    <div class="section-head">
+      <p class="eyebrow">About Brian</p>
+
+      <div>
+        <h2 class="section-title">
+          Design precision meets
+          <br />
+          <em>technical fluency.</em>
+        </h2>
+
+        <p class="body-copy homepage-about-copy">
+          {about.introduction}
+        </p>
+
+        <a href={`${base}about/`}>
+          More about me
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED SKILLS -->
+  {
+    featuredSkills.length > 0 && (
+      <section class="wrap homepage-skills">
+        <div class="section-head">
+          <p class="eyebrow">Capabilities / Expertise</p>
+
+          <h2 class="section-title">
+            Across strategy,
+            <br />
+            <em>design and delivery.</em>
+          </h2>
+        </div>
+
+        <div class="homepage-skills-grid">
+          {
+            featuredSkills.map((skill, index) => (
+              <article class="homepage-skill">
+                <span>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                <div>
+                  <small>{skill.category}</small>
+                  <h3>{skill.name}</h3>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        <a href={`${base}about/`}>
+          View complete capabilities
+          <span>→</span>
+        </a>
+      </section>
+    )
+  }
+
+  <!-- RESOURCES PREVIEW -->
+  {
+    resources.length > 0 && (
+      <section class="wrap homepage-resources">
+        <div class="section-head">
+          <p class="eyebrow">Resources / Notes</p>
+
+          <h2 class="section-title">
+            Useful things,
+            <br />
+            <em>shared openly.</em>
+          </h2>
+        </div>
+
+        <div class="resource-preview-grid">
+          {
+            resources.map((resource, index) => (
+              <a
+                href={`${base}resources/`}
+                class="resource-preview-card"
+              >
+                <div class="resource-number">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+
+                <div class="resource-content">
+                  <small>{resource.data.type}</small>
+                  <h3>{resource.data.title}</h3>
+                  <p>{resource.data.description}</p>
+                </div>
+
+                <span class="resource-arrow">↗</span>
+              </a>
+            ))
+          }
+        </div>
+
+        <a href={`${base}resources/`}>
+          Explore all resources
+          <span>→</span>
+        </a>
+      </section>
+    )
+  }
+</Base>

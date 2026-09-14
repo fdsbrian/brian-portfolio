@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="I design user-centered digital products that bring clarity to complex workflows."><meta name="theme-color" content="#090a0d"><link rel="canonical" href="https://fdsbrian.github.io/brian-portfolio/about/"><title>About | Brian Fernandes</title><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Brian Fernandes"><meta property="og:title" content="About | Brian Fernandes"><meta property="og:description" content="I design user-centered digital products that bring clarity to complex workflows."><meta property="og:url" content="https://fdsbrian.github.io/brian-portfolio/about/"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="About | Brian Fernandes"><meta name="twitter:description" content="I design user-centered digital products that bring clarity to complex workflows."><link rel="stylesheet" href="/brian-portfolio/_astro/BaseLayout.Cw8ypBw3.css"></head><body><div class="progress" aria-hidden="true"></div><header><a class="brand" href="/brian-portfolio/"><span class="logo"><img src="/brian-portfolio/logo.png" alt="Brian Fernandes logo"></span><span><b>Brian Fernandes</b><small>Design Engineer</small></span></a><nav><a href="/brian-portfolio/#work/">Work</a><a href="/brian-portfolio/about/">About</a><a href="/brian-portfolio/contact/">Contact</a><a href="/brian-portfolio/resources/">Resources</a><a href="/brian-portfolio/resume/">Résumé</a></nav><button class="menu-btn" aria-label="Open menu">☰</button><div class="mobile-nav"><a href="/brian-portfolio/#work/">Work</a><a href="{base}about/">About</a><a href="/brian-portfolio/contact/">Contact</a><a href="/brian-portfolio/resources/">Resources</a><a href="/brian-portfolio/resume/">Résumé</a></div></header><main><section class="wrap about-intro"><p class="eyebrow">Profile / Experience</p><h1 class="page-title">Curious by nature.<br><em>Precise by practice.</em></h1><p class="about-lead">I design user-centered digital products that bring clarity to complex workflows.</p></section><section class="wrap about-grid"><div><div class="portrait"><span>Profile image</span></div></div><div><p class="body-copy about-description">My work brings together product thinking, user experience, visual design and technical implementation. I focus on creating enterprise interfaces that are useful, scalable and carefully crafted.</p><h2 class="content-heading">Experience</h2><div class="experience-list"><article class="experience"><div><span class="experience-index">01</span><p class="experience-period">Present</p></div><div><h3>Senior User Interface Design Engineer</h3><p class="experience-company">Enterprise Technology Team · Doha, Qatar</p><p class="body-copy">Designing user-centered enterprise platforms, design systems, interactive prototypes and technical product experiences.</p></div></article><article class="experience"><div><span class="experience-index">02</span><p class="experience-period">Previously</p></div><div><h3>UI/UX Designer and Frontend Specialist</h3><p class="experience-company">Digital Products · Doha, Qatar</p><p class="body-copy">Created responsive interfaces, reusable components and prototypes for web-based digital services.</p></div></article></div></div></section><section class="wrap skills-section"><div class="section-head"><p class="eyebrow">Capabilities / Tools</p><h2 class="section-title">Experience across<br><em>design and delivery.</em></h2></div><div class="skills-grid"><article class="skill-card featured"><span>01</span><small>Design</small><h3>User Interface Design</h3></article><article class="skill-card featured"><span>02</span><small>Strategy</small><h3>User Experience Strategy</h3></article><article class="skill-card featured"><span>03</span><small>Design</small><h3>Design Systems</h3></article><article class="skill-card featured"><span>04</span><small>Tools</small><h3>Figma</h3></article><article class="skill-card featured"><span>05</span><small>Development</small><h3>HTML and CSS</h3></article><article class="skill-card featured"><span>06</span><small>Development</small><h3>JavaScript</h3></article><article class="skill-card"><span>07</span><small>Development</small><h3>Astro</h3></article><article class="skill-card featured"><span>08</span><small>Design</small><h3>Responsive Design</h3></article><article class="skill-card"><span>09</span><small>Design</small><h3>Accessibility</h3></article><article class="skill-card featured"><span>10</span><small>Design</small><h3>Interactive Prototyping</h3></article><article class="skill-card"><span>11</span><small>Design</small><h3>Logo Designing</h3></article></div></section></main><footer><div class="footer-card"><p class="footer-eyebrow">Have a complex idea?</p><h2>Let's make it feel<br><em>beautifully simple.</em></h2><div class="footer-actions"><a href="mailto:hello@example.com">hello@example.com<span>↗</span></a><div class="footer-links"><a href="https://github.com/fdsbrian" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/brian-portfolio/contact/">Contact →</a></div></div></div><div class="copyright"><span>© 2026 Brian Fernandes</span><span>Senior User Interface Design Engineer · Doha, Qatar</span></div></footer><script>
+      const progress = document.querySelector('.progress');
+
+      const updateProgress = () => {
+        if (!progress) return;
+
+        const availableScroll =
+          document.documentElement.scrollHeight -
+          window.innerHeight;
+
+        const percentage =
+          availableScroll > 0
+            ? window.scrollY / availableScroll
+            : 0;
+
+        progress.style.transform =
+          `scaleX(${percentage})`;
+      };
+
+      window.addEventListener(
+        'scroll',
+        updateProgress,
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'resize',
+        updateProgress,
+        { passive: true }
+      );
+
+      updateProgress();
+
+      const menuButton =
+        document.querySelector('.menu-btn');
+
+      const mobileNavigation =
+        document.querySelector('.mobile-nav');
+
+      menuButton?.addEventListener('click', () => {
+        const isOpen =
+          mobileNavigation?.classList.toggle('open') ?? false;
+
+        menuButton.setAttribute(
+          'aria-expanded',
+          String(isOpen)
+        );
+      });
+
+      mobileNavigation?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileNavigation.classList.remove('open');
+          menuButton?.setAttribute(
+            'aria-expanded',
+            'false'
+          );
+        });
+      });
+    </script></body></html>

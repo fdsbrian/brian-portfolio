@@ -1,4 +1,77 @@
 ---
-import site from '../data/site.json';const base=import.meta.env.BASE_URL;
+import site from '../data/site.json';
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const currentYear = new Date().getFullYear();
 ---
-<footer><div class="footer-card"><small>Have a complex idea?</small><h2>Let's make it feel <em>beautifully simple.</em></h2><a href={`${base}contact`}>{site.email} ↗</a></div><div class="copyright">© 2026 Brian Fernandes <span>Designed with intent</span></div></footer>
+
+<footer>
+  <div class="footer-card">
+    <p class="footer-eyebrow">
+      {site.footerEyebrow}
+    </p>
+
+    <h2>
+      {
+        site.footerTitle ===
+        "Let's make it feel beautifully simple." ? (
+          <>
+            Let's make it feel
+            <br />
+            <em>beautifully simple.</em>
+          </>
+        ) : (
+          site.footerTitle
+        )
+      }
+    </h2>
+
+    <div class="footer-actions">
+      <a href={`mailto:${site.email}`}>
+        {site.email}
+        <span>↗</span>
+      </a>
+
+      <div class="footer-links">
+        {
+          site.linkedin && (
+            <a
+              href={site.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn ↗
+            </a>
+          )
+        }
+
+        {
+          site.github && (
+            <a
+              href={site.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub ↗
+            </a>
+          )
+        }
+
+        <a href={`${base}contact/`}>
+          Contact →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright">
+    <span>© {currentYear} {site.name}</span>
+
+    <span>
+      {site.role} · {site.location}
+    </span>
+  </div>
+</footer>
