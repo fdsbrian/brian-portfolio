@@ -60,7 +60,9 @@ const base = import.meta.env.BASE_URL.endsWith('/')
           <span aria-hidden="true">↗</span>
         </a>
 
-        <a href={`${base}about/`}>
+        <a href={`${base}about/`}
+          class="hero-secondary-link"
+          >
           <span>{site.heroSecondaryLabel}</span>
           <span aria-hidden="true">→</span>
         </a>
@@ -90,7 +92,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     <div class="projects">
       {
         projects.map((project, index) => (
-          <a href={`${base}work/${project.id}/`} class="project-card">
+          <a href={`${base}work/${project.id}/`} class="project">
             <div
               class:list={[
                 'project-art',

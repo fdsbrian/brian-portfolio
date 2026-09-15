@@ -1,4 +1,58 @@
 ---
-import Base from '../layouts/BaseLayout.astro';import {getCollection} from 'astro:content';const resources=(await getCollection('resources')).filter(x=>x.data.published).sort((a,b)=>a.data.order-b.data.order);
+
+import Base from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const resources = (await getCollection('resources'))
+.filter((resource) => resource.data.published)
+.sort((a, b) => a.data.order - b.data.order);
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+? import.meta.env.BASE_URL
+: `${import.meta.env.BASE_URL}/`;
 ---
-<Base title="Resources | Brian Fernandes"><section class="wrap"><p class="eyebrow">Resources / Notes / Tools</p><h1 class="page-title">Useful things,<br/><em>shared openly.</em></h1><p class="body-copy">A growing library of templates, guides and practical notes.</p></section><section class="wrap cards">{resources.map(r=><article class="card"><b>{r.data.type}</b><h2>{r.data.title}</h2><p class="body-copy">{r.data.description}</p></article>)}</section></Base>
+
+<Base
+  title="Resources | Brian Fernandes"
+  description="Templates, guides, tools and practical notes from Brian Fernandes."
+>
+  <section class="wrap">
+    <p class="eyebrow">
+      Resources / Notes / Tools
+    </p>
+
+
+<h1 class="page-title">
+  Useful things,
+  <br />
+  <em>shared openly.</em>
+</h1>
+
+<p class="body-copy">
+  A growing library of templates, guides and practical notes.
+</p>
+
+
+  </section>
+
+  <section class="wrap cards">
+    {
+      resources.map((resource) => (
+        <a href={`${base}resources/${resource.slug}/`}>
+          <article class="card">
+            <b>{resource.data.type}</b>
+
+
+        <h2>{resource.data.title}</h2>
+
+        <p class="body-copy">
+          {resource.data.description}
+        </p>
+      </article>
+    </a>
+  ))
+}
+
+
+  </section>
+</Base>
