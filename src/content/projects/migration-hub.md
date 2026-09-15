@@ -1,6 +1,9 @@
 ---
 title: "Telecom Migration Hub"
 category: "Service Design · Technical UX"
+industry: "Education Technology"
+role: "Lead UI/UX Designer"
+client: "Enterprise Organization"
 year: "2026"
 summary: "A unified workspace for coordinating a complex migration across teams and milestones."
 featured: true
