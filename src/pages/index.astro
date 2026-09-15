@@ -20,6 +20,26 @@ const featuredSkills = about.skills
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+
+const getMediaUrl = (path?: string) => {
+  if (!path) {
+    return '';
+  }
+
+  if (
+    path.startsWith('http://') ||
+    path.startsWith('https://')
+  ) {
+    return path;
+  }
+
+  const cleanPath = path
+    .replace(/^\/brian-portfolio\//, '')
+    .replace(/^\//, '');
+
+  return `${base}${cleanPath}`;
+};
+
 ---
 
 <Base
@@ -75,75 +95,131 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="work" class="wrap work-section">
-    <div class="section-head">
-      <p class="eyebrow">
-        Selected work / 2025–2026
-      </p>
+<!-- PROJECTS -->
+<section id="work" class="wrap work-section">
+  <div class="section-head">
+    <p class="eyebrow">
+      Selected work / 2025–2026
+    </p>
 
-      <h2 class="section-title">
-        Complex products.
-        <br />
-        <em>Clear experiences.</em>
-      </h2>
-    </div>
+    <h2 class="section-title">
+      Complex products.
+      <br />
+      <em>Clear experiences.</em>
+    </h2>
+  </div>
 
-    <div class="projects">
-      {
-        projects.map((project, index) => (
-          <a href={`${base}work/${project.id}/`} class="project">
-            <div
-              class:list={[
-                'project-art',
-                `project-art-${(index % 3) + 1}`
-              ]}
-            >
+  <div class="projects">
+    {
+      projects.map((project, index) => {
+        const coverUrl = getMediaUrl(project.data.cover);
+
+        return (
+          <a
+            href={`${base}work/${project.id}/`}
+            class:list={[
+              'project',
               {
-                project.data.cover ? (
-                  <img
-                    src={project.data.cover}
-                    alt={project.data.title}
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                  />
-                ) : (
-                  <div class="project-placeholder">
-                    <span>
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-
-                    <small>{project.data.category}</small>
-                  </div>
-                )
+                'project-featured': project.data.featured
               }
+            ]}
+          >
+            {
+              coverUrl && (
+                <div class="project-cover">
+                  <img
+                    src={coverUrl}
+                    alt={project.data.title}
+                    class="project-placeholder"
+                  />
 
-              <span class="magazine-index">
-                {String(index + 1).padStart(2, '0')}
-              </span>
+                  <span aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
 
-              <span class="project-view">
-                View case study ↗
-              </span>
-            </div>
+                  <small>{project.data.category}</small>
+                </div>
+              )
+            }
+
+            <span
+              class="magazine-index"
+              aria-hidden="true"
+            >
+              {String(index + 1).padStart(2, '0')}
+            </span>
+
+            {
+              project.data.featured && (
+                <span class="project-featured-label">
+                  Featured project
+                </span>
+              )
+            }
+
+            <span
+              class="project-view"
+              aria-hidden="true"
+            >
+              View case study ↗
+            </span>
 
             <div class="project-meta">
-              <div>
+              <div class="project-meta-content">
+                <div class="project-meta-top">
+                  {
+                    project.data.industry && (
+                      <span>{project.data.industry}</span>
+                    )
+                  }
+
+                  <span>{project.data.year}</span>
+                </div>
+
                 <h3>{project.data.title}</h3>
 
-                <p>
+                <p class="project-category">
                   {project.data.category}
-                  <span>·</span>
-                  {project.data.year}
                 </p>
+
+                {
+                  (project.data.role || project.data.client) && (
+                    <div class="project-details">
+                      {
+                        project.data.role && (
+                          <span>
+                            <small>Role</small>
+                            {project.data.role}
+                          </span>
+                        )
+                      }
+
+                      {
+                        project.data.client && (
+                          <span>
+                            <small>Client</small>
+                            {project.data.client}
+                          </span>
+                        )
+                      }
+                    </div>
+                  )
+                }
               </div>
 
-              <span class="project-arrow">↗</span>
+              <span
+                class="project-arrow"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
             </div>
           </a>
-        ))
-      }
-    </div>
-  </section>
+        );
+      })
+    }
+  </div>
+</section>
 
   <!-- EDITORIAL MARQUEE -->
   <div class="marquee" aria-hidden="true">
