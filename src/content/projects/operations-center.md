@@ -1,9 +1,9 @@
 ---
 title: "Operations Command Center"
 category: "Dashboard · Design System"
-industry: "Education Technology"
-role: "Lead UI/UX Designer"
-client: "Enterprise Organization"
+industry: "Operations Management"
+role: "Lead Product Designer"
+client: "Enterprise Operations"
 year: "2025"
 summary: "A high-density interface that turns operational signals into clear priorities."
 featured: false
