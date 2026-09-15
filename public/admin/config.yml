@@ -43,6 +43,22 @@ collections:
       - label: Category
         name: category
         widget: string
+      
+      - label: Industry
+        name: industry
+        widget: string
+        required: false
+
+      - label: Role
+        name: role
+        widget: string
+        required: false
+
+      - label: Client
+        name: client
+        widget: string
+        required: false
+        hint: Use an anonymized client name when confidentiality applies.
 
       - label: Year
         name: year

@@ -1,6 +1,9 @@
 ---
 title: "Enterprise Learning Platform"
 category: "Product Design · UX Strategy"
+industry: "Education Technology"
+role: "Lead UI/UX Designer"
+client: "Enterprise Organization"
 year: "2026"
 summary: "A modular learning experience that makes enterprise knowledge easier to discover, complete and manage."
 featured: true
