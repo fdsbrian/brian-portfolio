@@ -17,9 +17,17 @@ outcome: A clearer end-to-end experience with scalable course discovery and
   progress tracking.
 gallery:
   - layout: full
-    image: /brian-portfolio/uploads/bg_pattern.png
+    image: /brian-portfolio/uploads/light.png
     alt: Enterprise learning dashboard interface
     caption: Learning progress and course discovery dashboard
+  - layout: half
+    image: /brian-portfolio/uploads/screenshot-2026-08-25-at-11.58.09 am.png
+    alt: Course discovery interface with filters
+    caption: Course discovery and filtering experience
+  - layout: half
+    image: /brian-portfolio/uploads/grunge.jpg
+    alt: Course discovery interface with filters
+    caption: Course discovery and filtering experience
 ---
 
 Additional project narrative, process notes, images and metrics can be managed here through the CMS.

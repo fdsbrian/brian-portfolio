@@ -182,6 +182,55 @@ const coverUrl = getMediaUrl(project.data.cover);
   </article>
 </section>
 
+{
+  project.data.gallery.length > 0 && (
+    <section
+      class="wrap case-study-gallery"
+      aria-labelledby="project-gallery-title"
+    >
+      <div class="case-study-gallery-heading">
+        <p class="eyebrow">Selected screens</p>
+
+        <h2 id="project-gallery-title">
+          Project gallery
+        </h2>
+      </div>
+
+      <div class="case-study-gallery-grid">
+        {
+          project.data.gallery.map((item, index) => (
+            <figure
+              class:list={[
+                'case-study-gallery-item',
+                `case-study-gallery-item--${item.layout}`
+              ]}
+            >
+              <div class="case-study-gallery-image">
+                {getMediaUrl(item.image)}                  alt={item.alt}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+
+              {
+                item.caption && (
+                  <figcaption>
+                    <span aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    <p>{item.caption}</p>
+                  </figcaption>
+                )
+              }
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+  )
+}
+
 <section class="wrap case-study-content">
   <div class="case-study-content-label">
     <p class="eyebrow">Project narrative</p>
