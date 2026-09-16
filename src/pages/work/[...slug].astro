@@ -3,7 +3,9 @@ import Base from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
 
   return projects.map((project) => ({
     params: {
@@ -17,6 +19,26 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+
+const allProjects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const currentProjectIndex = allProjects.findIndex(
+  (item) => item.id === project.id
+);
+
+const previousProject =
+  allProjects[
+    (currentProjectIndex - 1 + allProjects.length) %
+      allProjects.length
+  ];
+
+const nextProject =
+  allProjects[
+    (currentProjectIndex + 1) %
+      allProjects.length
+  ];
 
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -171,14 +193,50 @@ const coverUrl = getMediaUrl(project.data.cover);
 </section>
 
 <nav
-  class="wrap case-study-footer-nav"
+  class="wrap case-study-project-nav"
   aria-label="Project navigation"
 >
-  <a href={`${base}#work`}>
-    <span>Explore all work</span>
-    <span aria-hidden="true">↗</span>
+  <a
+    href={`${base}work/${previousProject.id}/`}
+    class="case-study-project-link" aria-hidden="true"
+  >
+    <span class="case-study-project-direction">
+      ← Previous project
+    </span>
+
+<strong>{previousProject.data.title}</strong>
+
+<small>
+  {previousProject.data.category} ·
+  {previousProject.data.year}
+</small>
+</a>
+
+<a
+href={`${base}work/${nextProject.id}/`}
+class="case-study-project-link"
+>
+
+<span
+  class="case-study-project-direction"
+  aria-hidden="true"
+>
+  Next project →
+</span>
+
+<strong>{nextProject.data.title}</strong>
+
+<small>
+  {nextProject.data.category} ·
+  {nextProject.data.year}
+</small>
+
   </a>
+
+<a href={`${base}#work`}> <span>Explore all work</span> <span aria-hidden="true">↗</span> </a>
+
 </nav>
+
 
   </article>
 </Base>
