@@ -21,7 +21,19 @@ const projects = defineCollection({
     order: z.number().default(0),
     challenge: z.string(),
     approach: z.string(),
-    outcome: z.string()
+    outcome: z.string(),
+
+    gallery: z
+      .array(
+        z.object({
+          image: z.string(),
+          alt: z.string(),
+          caption: z.string().optional(),
+          layout: z.enum(['full', 'half']).default('full')
+        })
+      )
+      .optional()
+      .default([])
   })
 });
 
