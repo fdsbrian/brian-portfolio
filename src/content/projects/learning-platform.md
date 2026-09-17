@@ -7,6 +7,9 @@ client: Enterprise Organization
 year: "2026"
 summary: A modular learning experience that makes enterprise knowledge easier to
   discover, complete and manage.
+seoTitle: Enterprise Learning Platform UX Case Study
+seoDescription: A product design case study exploring a scalable enterprise
+  learning and course-discovery experience.
 featured: true
 order: 1
 challenge: Employees faced fragmented training journeys and limited visibility
