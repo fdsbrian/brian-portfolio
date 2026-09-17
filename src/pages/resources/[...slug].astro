@@ -1,0 +1,136 @@
+---
+import Base from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const resources = (await getCollection('resources'))
+    .filter((resource) => resource.data.published)
+    .sort((a, b) => a.data.order - b.data.order);
+
+  return resources.map((resource) => ({
+    params: {
+      slug: resource.id
+    },
+    props: {
+      resource
+    }
+  }));
+}
+
+const { resource } = Astro.props;
+const { Content } = await render(resource);
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const getMediaUrl = (path?: string) => {
+  if (!path) {
+    return '';
+  }
+
+  if (
+    path.startsWith('http://') ||
+    path.startsWith('https://')
+  ) {
+    return path;
+  }
+
+  const cleanPath = path
+    .replace(/^\/brian-portfolio\//, '')
+    .replace(/^\//, '');
+
+  return `${base}${cleanPath}`;
+};
+
+const coverUrl = getMediaUrl(resource.data.cover);
+const fileUrl = getMediaUrl(resource.data.file);
+---
+
+<Base
+  title={
+    resource.data.seoTitle?.trim() ||
+    `${resource.data.title} | Brian Fernandes`
+  }
+  description={
+    resource.data.seoDescription?.trim() ||
+    resource.data.description
+  }
+  image={
+    resource.data.seoImage ||
+    resource.data.cover
+  }
+>
+  <article class="resource-detail">
+    <header class="wrap resource-detail-header">
+      <a href={`${base}resources/`}>
+        <span aria-hidden="true">←</span>
+        Back to resources
+      </a>
+
+      <div class="resource-detail-heading">
+        <div>
+          <p class="eyebrow">
+            Resource / {resource.data.type}
+          </p>
+
+          <h1 class="page-title">
+            {resource.data.title}
+          </h1>
+        </div>
+
+        <div class="resource-detail-introduction">
+          <p>{resource.data.description}</p>
+
+          {
+            fileUrl && (
+              <a
+                href={fileUrl}
+                class="resource-download"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download resource
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </header>
+
+    {
+      coverUrl && (
+        <section class="wrap resource-detail-visual">
+          <figure class="resource-detail-cover">
+            <img
+              src={coverUrl}
+              alt={resource.data.title}
+            />
+          </figure>
+        </section>
+      )
+    }
+
+    <section class="wrap resource-detail-content">
+      <div class="resource-detail-content-label">
+        <p class="eyebrow">
+          Overview
+        </p>
+      </div>
+
+      <div class="resource-detail-rich-text">
+        <Content />
+      </div>
+    </section>
+
+    <nav
+      class="wrap resource-detail-footer"
+      aria-label="Resource navigation"
+    >
+      <a href={`${base}resources/`}>
+        <span>Explore all resources</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
+  </article>
+</Base>
