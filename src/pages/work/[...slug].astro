@@ -133,7 +133,12 @@ const coverUrl = getMediaUrl(project.data.cover);
   {
     coverUrl ? (
       <figure class="case-study-cover">
-        {coverUrl}
+        <img
+          src={coverUrl}
+          alt={project.data.coverAlt || project.data.title}
+          loading="eager"
+          decoding="async"
+          >
       </figure>
     ) : (
       <div
@@ -206,7 +211,9 @@ const coverUrl = getMediaUrl(project.data.cover);
               ]}
             >
               <div class="case-study-gallery-image">
-                {getMediaUrl(item.image)}                  alt={item.alt}
+                <img
+                  src={getMediaUrl(item.image)}
+                  alt={item.alt}
                   loading={index === 0 ? 'eager' : 'lazy'}
                   decoding="async"
                 />
