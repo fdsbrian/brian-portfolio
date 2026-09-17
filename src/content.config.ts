@@ -23,6 +23,17 @@ const projects = defineCollection({
     approach: z.string(),
     outcome: z.string(),
 
+    results: z
+      .array(
+        z.object({
+          value: z.string(),
+          label: z.string(),
+          description: z.string().optional()
+        })
+      )
+      .optional()
+      .default([]),
+
     gallery: z
       .array(
         z.object({

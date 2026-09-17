@@ -103,6 +103,27 @@ collections:
         name: outcome
         widget: text
 
+      - label: Results
+        name: results
+        widget: list
+        required: false
+        collapsed: false
+        summary: "{{fields.label}}"
+
+        fields:
+          - label: Metric
+            name: value
+            widget: string
+
+          - label: Label
+            name: label
+            widget: string
+
+          - label: Description
+            name: description
+            widget: string
+            required: false
+
       - label: Project Gallery
         name: gallery
         widget: list

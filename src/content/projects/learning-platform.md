@@ -15,6 +15,16 @@ approach: Research, task-flow simplification, information architecture and a
   reusable design system.
 outcome: A clearer end-to-end experience with scalable course discovery and
   progress tracking.
+results:
+  - value: 35%
+    label: Faster Course Discovery
+    description: Reduced navigation friction
+  - value: 150+
+    label: Reusable Components
+    description: Design system adoption
+  - value: 4.8/5
+    label: User Satisfaction
+    description: Post-launch feedback
 gallery:
   - layout: full
     image: /brian-portfolio/uploads/light.png
