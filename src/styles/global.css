@@ -827,20 +827,100 @@ footer em {
 }
 
 .card {
+  position: relative;
+  display: flex;
   min-height: 300px;
-  border: 1px solid #ffffff20;
-  border-radius: 28px;
+  flex-direction: column;
   padding: 28px;
-  transition: .25s
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 13%);
+  border-radius: 28px;
+  color: inherit;
+  background: rgb(255 255 255 / 2%);
+  transition:
+    transform 250ms ease,
+    border-color 250ms ease,
+    background-color 250ms ease,
+    box-shadow 250ms ease;
 }
 
-.card:hover {
+.card::before {
+  position: absolute;
+  right: -80px;
+  bottom: -100px;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  background: rgb(249 115 22 / 20%);
+  filter: blur(70px);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  border-color: rgb(249 115 22 / 70%);
+  background: rgb(249 115 22 / 5%);
+  box-shadow: 0 22px 55px rgb(0 0 0 / 25%);
   transform: translateY(-7px);
-  border-color: var(--orange)
+}
+
+.card:hover::before,
+.card:focus-visible::before {
+  opacity: 1;
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 5px;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .card h2 {
-  margin-top: 110px
+  margin: 110px 0 0;
+  color: var(--text);
+  font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  transition: color 200ms ease;
+}
+
+.card:hover h2,
+.card:focus-visible h2 {
+  color: var(--orange);
+}
+
+.card .body-copy {
+  margin: 16px 0 0;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 30px;
+  color: var(--orange);
+}
+
+.card-link span:last-child {
+  transition: transform 200ms ease;
+}
+
+.card:hover .card-link span:last-child,
+.card:focus-visible .card-link span:last-child {
+  transform: translate(4px, -4px);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 5px;
 }
 
 .case-grid {
