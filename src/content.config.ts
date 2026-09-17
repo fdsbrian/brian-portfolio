@@ -21,7 +21,30 @@ const projects = defineCollection({
     order: z.number().default(0),
     challenge: z.string(),
     approach: z.string(),
-    outcome: z.string()
+    outcome: z.string(),
+
+    results: z
+      .array(
+        z.object({
+          value: z.string(),
+          label: z.string(),
+          description: z.string().optional()
+        })
+      )
+      .optional()
+      .default([]),
+
+    gallery: z
+      .array(
+        z.object({
+          image: z.string(),
+          alt: z.string(),
+          caption: z.string().optional(),
+          layout: z.enum(['full', 'half']).default('full')
+        })
+      )
+      .optional()
+      .default([])
   })
 });
 

@@ -103,6 +103,60 @@ collections:
         name: outcome
         widget: text
 
+      - label: Results
+        name: results
+        widget: list
+        required: false
+        collapsed: false
+        summary: "{{fields.label}}"
+
+        fields:
+          - label: Metric
+            name: value
+            widget: string
+
+          - label: Label
+            name: label
+            widget: string
+
+          - label: Description
+            name: description
+            widget: string
+            required: false
+
+      - label: Project Gallery
+        name: gallery
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{fields.caption}}"
+
+        fields:
+          - label: Image
+            name: image
+            widget: image
+
+          - label: Alternative Text
+            name: alt
+            widget: string
+            hint: Describe the image clearly for visitors using assistive technology.
+
+          - label: Caption
+            name: caption
+            widget: string
+            required: false
+
+          - label: Layout
+            name: layout
+            widget: select
+            default: full
+            options:
+              - label: Full Width
+                value: full
+
+              - label: Half Width
+                value: half
+
       - label: Case Study Content
         name: body
         widget: markdown
