@@ -67,9 +67,18 @@ const coverUrl = getMediaUrl(project.data.cover);
 ---
 
 <Base
-  title={`${project.data.title} | Brian Fernandes`}
-  description={project.data.summary}
-  image={project.data.cover}
+  title={
+    project.data.seoTitle?.trim() ||
+    `${project.data.title} | Brian Fernandes`
+  }
+  description={
+    project.data.seoDescription?.trim() ||
+    project.data.summary
+  }
+  image={
+    project.data.seoImage ||
+    project.data.cover
+  }
 >
   <article class="case-study">
     <header class="wrap case-study-header">

@@ -48,9 +48,18 @@ const fileUrl = getMediaUrl(resource.data.file);
 ---
 
 <Base
-  title={`${resource.data.title} | Brian Fernandes`}
-  description={resource.data.description}
-  image={resource.data.cover}
+  title={
+    resource.data.seoTitle?.trim() ||
+    `${resource.data.title} | Brian Fernandes`
+  }
+  description={
+    resource.data.seoDescription?.trim() ||
+    resource.data.description
+  }
+  image={
+    resource.data.seoImage ||
+    resource.data.cover
+  }
 >
   <article class="resource-detail">
     <header class="wrap resource-detail-header">
