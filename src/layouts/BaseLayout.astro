@@ -25,7 +25,7 @@ const canonicalURL = new URL(
   Astro.site ?? Astro.url.origin
 );
 
-const getMediaUrl = (path: string) => {
+const getMediaUrl = (path?: string) => {
   if (!path) return '';
 
   if (
@@ -61,6 +61,10 @@ const socialImage = getMediaUrl(image);
 
     <meta name="description" content={description} />
     <meta name="theme-color" content="#090a0d" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="color-scheme" content="dark" />
+
+<meta name="author" content={site.name} />
 
     <link
       rel="canonical"
@@ -71,6 +75,7 @@ const socialImage = getMediaUrl(image);
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -78,10 +83,17 @@ const socialImage = getMediaUrl(image);
 
     {
       socialImage && (
-        <meta
-          property="og:image"
-          content={socialImage}
-        />
+        <>
+          <meta
+            property="og:image"
+            content={socialImage}
+          />
+
+          <meta
+            property="og:image:alt"
+            content={`${title} social sharing image`}
+          />
+        </>
       )
     }
 
@@ -109,6 +121,8 @@ const socialImage = getMediaUrl(image);
         />
       )
     }
+    <link rel="icon" type="image/svg+xml" href href={`${base}site.webmanifest`} />
+
   </head>
 
   <body>

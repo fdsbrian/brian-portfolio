@@ -2834,3 +2834,37 @@ footer em {
     transition: none;
   }
 }
+
+/* =========================================================
+   ERROR PAGE
+   ========================================================= */
+
+.error-page {
+  display: flex;
+  min-height: 72vh;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.error-page .body-copy {
+  max-width: 560px;
+  margin-top: 35px;
+  font-size: 18px;
+}
+
+.error-page-link {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 9px;
+  margin-top: 30px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid currentColor;
+  color: var(--orange);
+  transition: gap 200ms ease;
+}
+
+.error-page-link:hover,
+.error-page-link:focus-visible {
+  gap: 15px;
+}
