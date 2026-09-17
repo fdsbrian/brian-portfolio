@@ -1,7 +1,9 @@
 ---
-title: "UI Review Checklist"
-type: "Checklist"
-description: "A quality-control checklist for hierarchy, spacing, states and accessibility."
+title: UI Review Checklist
+type: Checklist
+description: A quality-control checklist for hierarchy, spacing, states and accessibility.
+cover: /brian-portfolio/uploads/grunge.jpg
+file: /brian-portfolio/uploads/mcc-logo.pdf
 published: true
 order: 2
 ---
