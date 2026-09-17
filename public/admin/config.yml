@@ -67,6 +67,24 @@ collections:
       - label: Summary
         name: summary
         widget: text
+      
+      - label: SEO Title
+        name: seoTitle
+        widget: string
+        required: false
+        hint: Optional. Leave empty to use the project title automatically.
+
+      - label: SEO Description
+        name: seoDescription
+        widget: text
+        required: false
+        hint: Optional. Leave empty to use the project summary automatically.
+
+      - label: Social Sharing Image
+        name: seoImage
+        widget: image
+        required: false
+        hint: Optional. Leave empty to use the project cover image automatically.
 
       - label: Cover Image
         name: cover
@@ -200,6 +218,24 @@ collections:
       - label: Description
         name: description
         widget: text
+
+      - label: SEO Title
+        name: seoTitle
+        widget: string
+        required: false
+        hint: Optional. Leave empty to use the resource title automatically.
+
+      - label: SEO Description
+        name: seoDescription
+        widget: text
+        required: false
+        hint: Optional. Leave empty to use the resource description automatically.
+
+      - label: Social Sharing Image
+        name: seoImage
+        widget: image
+        required: false
+        hint: Optional. Leave empty to use the resource cover image automatically.
 
       - label: Cover Image
         name: cover
