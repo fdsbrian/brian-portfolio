@@ -38,7 +38,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   <section class="wrap cards">
     {
       resources.map((resource) => (
-        <a href={`${base}resources/${resource.slug}/`}>
+        <a href={`${base}${resource.id}/`}>
           <article class="card">
             <b>{resource.data.type}</b>
 
