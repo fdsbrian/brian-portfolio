@@ -47,6 +47,35 @@ const getMediaUrl = (path?: string) => {
 
 const canonicalUrlString = canonicalURL.toString();
 const socialImage = getMediaUrl(image);
+
+const homeUrl = new URL(base, Astro.site ?? Astro.url.origin).toString();
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${homeUrl}#website`,
+      url: homeUrl,
+      name: `${site.name} Portfolio`,
+      description: site.seoDescription,
+      inLanguage: 'en'
+    },
+    {
+      '@type': 'Person',
+      '@id': `${homeUrl}#person`,
+      name: site.name,
+      url: homeUrl,
+      jobTitle: site.role,
+      description: site.seoDescription,
+      sameAs: [
+        site.linkedin,
+        site.github
+      ].filter(Boolean)
+    }
+  ]
+};
+
 ---
 
 <!doctype html>
@@ -125,7 +154,10 @@ const socialImage = getMediaUrl(image);
         />
       )
     }
-
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(structuredData)}
+></script>
 
   </head>
 
