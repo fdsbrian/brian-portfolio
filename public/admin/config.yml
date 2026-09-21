@@ -326,6 +326,12 @@ collections:
           - label: Email
             name: email
             widget: string
+          
+          - label: Contact Form Endpoint
+            name: formEndpoint
+            widget: string
+            required: false
+            hint: Paste the Formspree endpoint, for example https://formspree.io/f/abcdefgh
 
           - label: LinkedIn URL
             name: linkedin
