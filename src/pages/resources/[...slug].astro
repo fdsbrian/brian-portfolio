@@ -45,6 +45,45 @@ const getMediaUrl = (path?: string) => {
 
 const coverUrl = getMediaUrl(resource.data.cover);
 const fileUrl = getMediaUrl(resource.data.file);
+
+const siteOrigin = Astro.site ?? Astro.url.origin;
+
+const homeUrl = new URL(base, siteOrigin).toString();
+
+const resourcesUrl = new URL(
+  `${base}resources/`,
+  siteOrigin
+).toString();
+
+const resourceUrl = new URL(
+  Astro.url.pathname,
+  siteOrigin
+).toString();
+
+const breadcrumbData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: homeUrl
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Resources',
+      item: resourcesUrl
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: resource.data.title,
+      item: resourceUrl
+    }
+  ]
+};
 ---
 
 <Base
@@ -61,6 +100,12 @@ const fileUrl = getMediaUrl(resource.data.file);
     resource.data.cover
   }
 >
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(breadcrumbData)}
+></script>
+
   <article class="resource-detail">
     <header class="wrap resource-detail-header">
       <a href={`${base}resources/`}>

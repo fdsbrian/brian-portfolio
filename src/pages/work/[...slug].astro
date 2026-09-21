@@ -64,6 +64,45 @@ return `${base}${cleanPath}`;
 };
 
 const coverUrl = getMediaUrl(project.data.cover);
+
+const siteOrigin = Astro.site ?? Astro.url.origin;
+
+const homeUrl = new URL(base, siteOrigin).toString();
+
+const workUrl = new URL(
+  `${base}#work`,
+  siteOrigin
+).toString();
+
+const projectUrl = new URL(
+  Astro.url.pathname,
+  siteOrigin
+).toString();
+
+const breadcrumbData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: homeUrl
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Work',
+      item: workUrl
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: project.data.title,
+      item: projectUrl
+    }
+  ]
+};
 ---
 
 <Base
@@ -80,6 +119,11 @@ const coverUrl = getMediaUrl(project.data.cover);
     project.data.cover
   }
 >
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(breadcrumbData)}
+></script>
+
   <article class="case-study">
     <header class="wrap case-study-header">
       <a href={`${base}#work`}>
