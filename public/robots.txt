@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fdsbrian.github.io/brian-portfolio/sitemap-index.xml

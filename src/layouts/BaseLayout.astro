@@ -25,7 +25,7 @@ const canonicalURL = new URL(
   Astro.site ?? Astro.url.origin
 );
 
-const getMediaUrl = (path: string) => {
+const getMediaUrl = (path?: string) => {
   if (!path) return '';
 
   if (
@@ -47,6 +47,35 @@ const getMediaUrl = (path: string) => {
 
 const canonicalUrlString = canonicalURL.toString();
 const socialImage = getMediaUrl(image);
+
+const homeUrl = new URL(base, Astro.site ?? Astro.url.origin).toString();
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${homeUrl}#website`,
+      url: homeUrl,
+      name: `${site.name} Portfolio`,
+      description: site.seoDescription,
+      inLanguage: 'en'
+    },
+    {
+      '@type': 'Person',
+      '@id': `${homeUrl}#person`,
+      name: site.name,
+      url: homeUrl,
+      jobTitle: site.role,
+      description: site.seoDescription,
+      sameAs: [
+        site.linkedin,
+        site.github
+      ].filter(Boolean)
+    }
+  ]
+};
+
 ---
 
 <!doctype html>
@@ -62,6 +91,14 @@ const socialImage = getMediaUrl(image);
     <meta name="description" content={description} />
     <meta name="theme-color" content="#090a0d" />
 
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="manifest" href={`${base}site.webmanifest`} />
+
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="color-scheme" content="dark" />
+
+<meta name="author" content={site.name} />
+
     <link
       rel="canonical"
       href={canonicalUrlString}
@@ -71,6 +108,7 @@ const socialImage = getMediaUrl(image);
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -78,10 +116,17 @@ const socialImage = getMediaUrl(image);
 
     {
       socialImage && (
-        <meta
-          property="og:image"
-          content={socialImage}
-        />
+        <>
+          <meta
+            property="og:image"
+            content={socialImage}
+          />
+
+          <meta
+            property="og:image:alt"
+            content={`${title} social sharing image`}
+          />
+        </>
       )
     }
 
@@ -109,6 +154,11 @@ const socialImage = getMediaUrl(image);
         />
       )
     }
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(structuredData)}
+></script>
+
   </head>
 
   <body>

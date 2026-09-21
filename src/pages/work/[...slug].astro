@@ -186,7 +186,12 @@ const breadcrumbData = {
   {
     coverUrl ? (
       <figure class="case-study-cover">
-        {coverUrl}
+        <img
+          src={coverUrl}
+          alt={project.data.coverAlt || project.data.title}
+          loading="eager"
+          decoding="async"
+          >
       </figure>
     ) : (
       <div
@@ -202,6 +207,48 @@ const breadcrumbData = {
     )
   }
 </section>
+
+{
+  project.data.results.length > 0 && (
+    <section
+      class="wrap case-study-results"
+      aria-labelledby="project-results-title"
+    >
+      <div class="case-study-results-heading">
+        <p class="eyebrow">Results / Impact</p>
+
+        <h2 id="project-results-title">
+          Measurable outcomes.
+        </h2>
+      </div>
+
+      <div class="case-study-results-grid">
+        {
+          project.data.results.map((result, index) => (
+            <article class="case-study-result">
+              <span
+                class="case-study-result-index"
+                aria-hidden="true"
+              >
+                {String(index + 1).padStart(2, '0')}
+              </span>
+
+              <strong>{result.value}</strong>
+
+              <h3>{result.label}</h3>
+
+              {
+                result.description && (
+                  <p>{result.description}</p>
+                )
+              }
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  )
+}
 
 <section class="wrap case-study-overview">
   <article class="case-study-block">
@@ -234,6 +281,57 @@ const breadcrumbData = {
     <p>{project.data.outcome}</p>
   </article>
 </section>
+
+{
+  project.data.gallery.length > 0 && (
+    <section
+      class="wrap case-study-gallery"
+      aria-labelledby="project-gallery-title"
+    >
+      <div class="case-study-gallery-heading">
+        <p class="eyebrow">Selected screens</p>
+
+        <h2 id="project-gallery-title">
+          Project gallery
+        </h2>
+      </div>
+
+      <div class="case-study-gallery-grid">
+        {
+          project.data.gallery.map((item, index) => (
+            <figure
+              class:list={[
+                'case-study-gallery-item',
+                `case-study-gallery-item--${item.layout}`
+              ]}
+            >
+              <div class="case-study-gallery-image">
+                <img
+                  src={getMediaUrl(item.image)}
+                  alt={item.alt}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+
+              {
+                item.caption && (
+                  <figcaption>
+                    <span aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    <p>{item.caption}</p>
+                  </figcaption>
+                )
+              }
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+  )
+}
 
 <section class="wrap case-study-content">
   <div class="case-study-content-label">

@@ -15,13 +15,39 @@ const projects = defineCollection({
     client: z.string().optional(),
     year: z.string(),
     summary: z.string(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+    seoImage: z.string().optional(),
     cover: z.string().optional(),
     coverAlt: z.string().optional(),
     featured: z.boolean().default(false),
     order: z.number().default(0),
     challenge: z.string(),
     approach: z.string(),
-    outcome: z.string()
+    outcome: z.string(),
+
+    results: z
+      .array(
+        z.object({
+          value: z.string(),
+          label: z.string(),
+          description: z.string().optional()
+        })
+      )
+      .optional()
+      .default([]),
+
+    gallery: z
+      .array(
+        z.object({
+          image: z.string(),
+          alt: z.string(),
+          caption: z.string().optional(),
+          layout: z.enum(['full', 'half']).default('full')
+        })
+      )
+      .optional()
+      .default([])
   })
 });
 
@@ -35,6 +61,9 @@ const resources = defineCollection({
     title: z.string(),
     type: z.string(),
     description: z.string(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+    seoImage: z.string().optional(),
     cover: z.string().optional(),
     file: z.string().optional(),
     published: z.boolean().default(true),

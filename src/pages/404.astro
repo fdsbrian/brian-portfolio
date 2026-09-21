@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
+<Base
+  title="Page Not Found | Brian Fernandes"
+  description="The requested page could not be found."
+>
+  <section class="wrap error-page">
+    <p class="eyebrow">Error / 404</p>
+
+    <h1 class="page-title">
+      Page not found.
+    </h1>
+
+    <p class="body-copy">
+      The page may have moved, or the address may be incorrect.
+    </p>
+
+    <a href={base}>
+      Return home
+      <span aria-hidden="true">→</span>
+    </a>
+  </section>
+</Base>
