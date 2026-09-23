@@ -1,4 +1,228 @@
 ---
-import Base from '../layouts/BaseLayout.astro';import site from '../data/site.json';
+import Base from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+
+const formEndpoint = site.formEndpoint?.trim() || '';
 ---
-<Base title="Contact | Brian Fernandes"><section class="wrap"><p class="eyebrow">Contact / Collaboration</p><h1 class="page-title">Let's make complexity<br/><em>feel simple.</em></h1></section><section class="wrap contact-grid"><a class="contact-card" href={`mailto:${site.email}`}><span>Start a conversation</span><h2>{site.email} ↗</h2></a><div class="cards" style="grid-template-columns:1fr"><a class="card" href={site.linkedin}>LinkedIn ↗</a><a class="card" href={site.github}>GitHub ↗</a><div class="card"><b>{site.availability}</b></div></div></section></Base>
+
+<Base
+  title="Contact | Brian Fernandes"
+  description="Contact Brian Fernandes to discuss product design, user experience, interface engineering and digital collaboration opportunities."
+>
+  <section class="wrap contact-intro">
+    <p class="eyebrow">Contact / Collaboration</p>
+
+    <h1 class="page-title">
+      Let's make complexity
+      <br />
+      <em>feel simple.</em>
+    </h1>
+
+    <p class="contact-intro-copy">
+      Have a project, product challenge or collaboration in mind?
+      Share a few details and I will get back to you.
+    </p>
+  </section>
+
+  <section class="wrap contact-layout">
+    <div class="contact-form-panel">
+      <div class="contact-panel-heading">
+        <p class="eyebrow">Start a conversation</p>
+
+        <h2>Tell me about your project.</h2>
+      </div>
+
+      {
+        formEndpoint ? (
+          <form
+            action={formEndpoint}
+            method="POST"
+          >
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="contact-name">
+                  Name
+                </label>
+
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+
+              <div class="contact-field">
+                <label for="contact-email">
+                  Email
+                </label>
+
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="contact-field">
+              <label for="contact-subject">
+                Subject
+              </label>
+
+              <input
+                id="contact-subject"
+                name="subject"
+                type="text"
+                required
+              />
+            </div>
+
+            <div class="contact-field">
+              <label for="contact-message">
+                Message
+              </label>
+
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+
+            <div
+              class="contact-honeypot"
+              aria-hidden="true"
+            >
+              <label for="contact-company">
+                Leave this field empty
+              </label>
+
+              <input
+                id="contact-company"
+                name="_gotcha"
+                type="text"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
+            <input
+              type="hidden"
+              name="_subject"
+              value="New portfolio enquiry"
+            />
+
+            <button
+              class="contact-submit"
+              type="submit"
+            >
+              <span>Send message</span>
+              <span aria-hidden="true">↗</span>
+            </button>
+
+            <p class="contact-form-note">
+              Required fields are marked through browser validation.
+              Your information is used only to respond to this enquiry.
+            </p>
+          </form>
+        ) : (
+          <div class="contact-form-unavailable">
+            <p>
+              The contact form is not configured yet.
+            </p>
+
+            <a href={`mailto:${site.email}`}>
+              Email me directly
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        )
+      }
+    </div>
+
+    <aside class="contact-sidebar">
+      <a
+        class="contact-card"
+        href={`mailto:${site.email}`}
+      >
+        <span class="contact-card-label">
+          Email
+        </span>
+
+        <strong>{site.email}</strong>
+
+        <span
+          class="contact-card-arrow"
+          aria-hidden="true"
+        >
+          ↗
+        </span>
+      </a>
+
+      {
+        site.linkedin && (
+          <a
+            class="contact-card"
+            href={site.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="contact-card-label">
+              Connect
+            </span>
+
+            <strong>LinkedIn</strong>
+
+            <span
+              class="contact-card-arrow"
+              aria-hidden="true"
+            >
+              ↗
+            </span>
+          </a>
+        )
+      }
+
+      {
+        site.github && (
+          <a
+            class="contact-card"
+            href={site.github}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="contact-card-label">
+              Code and experiments
+            </span>
+
+            <strong>GitHub</strong>
+
+            <span
+              class="contact-card-arrow"
+              aria-hidden="true"
+            >
+              ↗
+            </span>
+          </a>
+        )
+      }
+
+      <div class="contact-info-card">
+        <span class="contact-availability-dot"></span>
+
+        <span class="contact-card-label">
+          Availability
+        </span>
+
+        <strong>{site.availability}</strong>
+
+        <small>{site.location}</small>
+      </div>
+    </aside>
+  </section>
+</Base>
