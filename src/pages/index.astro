@@ -39,6 +39,40 @@ const getMediaUrl = (path?: string) => {
 
   return `${base}${cleanPath}`;
 };
+
+const heroMediaType =
+  site.heroMediaType === 'image' ||
+  site.heroMediaType === 'video'
+    ? site.heroMediaType
+    : 'none';
+
+const heroBackgroundImage = getMediaUrl(
+  site.heroBackgroundImage
+);
+
+const heroBackgroundVideo = getMediaUrl(
+  site.heroBackgroundVideo
+);
+
+const heroVideoPoster = getMediaUrl(
+  site.heroVideoPoster || site.heroBackgroundImage
+);
+
+const heroOverlay = Math.min(
+  Math.max(Number(site.heroOverlay) || 62, 0),
+  100
+);
+
+const hasHeroImage =
+  heroMediaType === 'image' &&
+  Boolean(heroBackgroundImage);
+
+const hasHeroVideo =
+  heroMediaType === 'video' &&
+  Boolean(heroBackgroundVideo);
+
+const hasHeroMedia =
+  hasHeroImage || hasHeroVideo;
 ---
 
 <Base
@@ -47,7 +81,66 @@ const getMediaUrl = (path?: string) => {
   image={site.seoImage}
 >
   <!-- HERO -->
-  <section class="wrap hero">
+  <section
+  class:list={[
+    'wrap',
+    'hero',
+    { 'hero--with-media': hasHeroMedia }
+  ]}
+  style={`--hero-overlay: ${heroOverlay / 100};`}
+  >
+
+{
+  hasHeroMedia && (
+    <div class="hero-media">
+  {
+    hasHeroVideo ? (
+      <>
+        <video
+          class="hero-media-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster={heroVideoPoster || undefined}
+        >
+          <source
+            src={heroBackgroundVideo}
+            type="video/mp4"
+          />
+        </video>
+
+        {
+          heroVideoPoster && (
+            <img
+              class="hero-media-video-fallback"
+              src={heroVideoPoster}
+              alt=""
+              loading="eager"
+              decoding="async"
+            />
+          )
+        }
+      </>
+    ) : (
+      <img
+        class="hero-media-image"
+        src={heroBackgroundImage}
+        alt={site.heroMediaAlt || ""}
+        loading="eager"
+        decoding="async"
+      />
+    )
+  }
+
+  <div class="hero-media-overlay"></div>
+</div>
+
+  )
+}
+
+
     <div class="hero-orb hero-orb-one"></div>
     <div class="hero-orb hero-orb-two"></div>
 
