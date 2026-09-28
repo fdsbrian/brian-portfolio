@@ -394,14 +394,19 @@ const breadcrumbData = {
                 `case-study-gallery-item--${item.layout}`
               ]}
             >
-              <div class="case-study-gallery-image">
+              <button
+                type="button"
+                class="case-study-gallery-image"
+                aria-label={`Open image ${index + 1}`}
+                data-gallery-index={index}
+                >
                 <img
                   src={getMediaUrl(item.image)}
                   alt={item.alt}
                   loading={index === 0 ? 'eager' : 'lazy'}
                   decoding="async"
                 />
-              </div>
+              </button>
 
               {
                 item.caption && (
