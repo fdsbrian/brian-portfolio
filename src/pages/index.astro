@@ -17,6 +17,9 @@ const featuredSkills = about.skills
   .filter((skill) => skill.featured)
   .slice(0, 8);
 
+const featuredClients =
+  site.featuredClients || [];
+
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -203,6 +206,7 @@ const hasHeroMedia =
       {
         projects.map((project, index) => {
           const coverUrl = getMediaUrl(project.data.cover);
+          const projectTransitionName = `project-cover-${project.id}`;
 
           return (
             <a
@@ -225,6 +229,8 @@ const hasHeroMedia =
                     <img
                       src={coverUrl}
                       alt={project.data.coverAlt || project.data.title}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
                     />
                   ) : (
                     <div class="project-placeholder">
@@ -430,4 +436,71 @@ const hasHeroMedia =
       </section>
     )
   }
+
+{
+  featuredClients.length > 0 && (
+    <section
+      class="wrap featured-clients"
+      aria-labelledby="featured-clients-title"
+    >
+      <div class="featured-clients-heading">
+        <p class="eyebrow">
+          Selected Collaborations
+        </p>
+
+        <h2 id="featured-clients-title">
+          Organizations, programs and teams I've contributed to through design and digital delivery.
+        </h2>
+      </div>
+
+      <div class="featured-clients-grid">
+        {
+          featuredClients.map((client) =>
+            client.url ? (
+              <a
+                href={client.url}
+                class="featured-client"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div class="featured-client-logo">
+                  {
+                    client.logo && (
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                      />
+                    )
+                  }
+                </div>
+
+                <div class="featured-client-info">
+                  <span>{client.name}</span>
+                  <span aria-hidden="true">↗</span>
+                </div>
+              </a>
+            ) : (
+              <div class="featured-client">
+                <div class="featured-client-logo">
+                  {
+                    client.logo && (
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                      />
+                    )
+                  }
+                </div>
+
+                <div class="featured-client-info">
+                  <span>{client.name}</span>
+                </div>
+              </div>
+            )
+          )
+        }
+      </div>
+    </section>
+  )
+}
 </Base>

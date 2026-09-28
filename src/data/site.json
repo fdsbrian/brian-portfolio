@@ -17,6 +17,23 @@
   "heroOverlay": 62,
   "formEndpoint": "https://formspree.io/f/xzezeapy",
   "heroSecondaryLabel": "About me",
+  "featuredClients": [
+    {
+      "name": "Aspire Zone Foundation",
+      "logo": "/brian-portfolio/uploads/azf_logo.svg",
+      "url": ""
+    },
+    {
+      "name": "Qatar Olympic Committee",
+      "logo": "",
+      "url": ""
+    },
+    {
+      "name": "Qatar Stars League",
+      "logo": "",
+      "url": ""
+    }
+  ],
   "availability": "Available for select collaborations",
   "seoTitle": "Brian Fernandes | Senior User Interface Design Engineer",
   "heroBody": "Bridging user experience, interface engineering and enterprise delivery to turn complex workflows into clear, elegant products.",

@@ -10,6 +10,10 @@ summary: A modular learning experience that makes enterprise knowledge easier to
 seoTitle: Enterprise Learning Platform UX Case Study
 seoDescription: A product design case study exploring a scalable enterprise
   learning and course-discovery experience.
+cover: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xtSnaO94QhDm73XKbmGlEMMieNfcRpaB5bV_J8z06ItQ8tQXurKuzTg&s=10
+heroMediaType: image
+heroBackgroundImage: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xtSnaO94QhDm73XKbmGlEMMieNfcRpaB5bV_J8z06ItQ8tQXurKuzTg&s=10
+heroOverlay: 60
 featured: true
 order: 1
 challenge: Employees faced fragmented training journeys and limited visibility

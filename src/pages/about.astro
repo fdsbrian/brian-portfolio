@@ -10,9 +10,24 @@ const getMediaUrl = (path: string) => {
   if (!path) return '';
 
   // Leave external URLs unchanged.
-  if (path.startsWith('http://') || path.startsWith('https://')) {
+  const getMediaUrl = (path?: string) => {
+  if (!path) {
+    return '';
+  }
+
+  if (
+    path.startsWith('http://') ||
+    path.startsWith('https://')
+  ) {
     return path;
   }
+
+  const cleanPath = path
+    .replace(/^\/brian-portfolio\//, '')
+    .replace(/^\//, '');
+
+  return `${base}${cleanPath}`;
+};
 
   // Remove the production repository prefix if Decap saved it.
   const cleanPath = path
@@ -44,8 +59,7 @@ const getMediaUrl = (path: string) => {
       {
         about.profileImage ? (
           <figure class="profile-portrait">
-            <img
-              srcfileImage)}              alt={about.profileImageAlt || 'Profile photograph'}
+            {getMediaUrl(about.profileImage)}  alt={about.profileImageAlt || 'Profile photograph'}
               loading="lazy"
               decoding="async"
             />
@@ -97,6 +111,92 @@ const getMediaUrl = (path: string) => {
       </div>
     </div>
   </section>
+
+  <section class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Professional Summary</p>
+
+    <div>
+      <p class="about-summary">
+        {about.professionalSummary}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Design Philosophy</p>
+
+    <div>
+      <h2 class="section-title">
+        Designing clarity.
+        <br />
+        <em>Reducing complexity.</em>
+      </h2>
+
+      <p class="body-copy about-philosophy">
+        {about.designPhilosophy}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap about-industries-section">
+  <div class="section-head">
+    <p class="eyebrow">Industries</p>
+
+    <h2 class="section-title">
+      Experience across
+      <br />
+      <em>multiple sectors.</em>
+    </h2>
+  </div>
+
+  <div class="industries-grid">
+    {
+      about.industries?.map((industry, index) => (
+        <article class="industry-chip">
+          <span>
+            {String(index + 1).padStart(2, '0')}
+          </span>
+
+          <strong>{industry}</strong>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<section class="wrap achievements-section">
+  <div class="section-head">
+    <p class="eyebrow">Selected Achievements</p>
+
+    <h2 class="section-title">
+      Building impact through
+      <br />
+      <em>design leadership.</em>
+    </h2>
+  </div>
+
+  <div class="achievements-grid">
+    {
+      about.achievements?.map((achievement, index) => (
+        <article class="achievement-card">
+          <span class="achievement-index">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+
+          <h3>{achievement.title}</h3>
+
+          <p class="body-copy">
+            {achievement.description}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+</section>
 
   <section class="wrap skills-section">
     <div class="section-head">
