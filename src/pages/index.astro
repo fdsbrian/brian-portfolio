@@ -86,7 +86,6 @@ const hasHeroMedia =
   <!-- HERO -->
   <section
   class:list={[
-    'wrap',
     'hero',
     { 'hero--with-media': hasHeroMedia }
   ]}
@@ -147,6 +146,7 @@ const hasHeroMedia =
     <div class="hero-orb hero-orb-one"></div>
     <div class="hero-orb hero-orb-two"></div>
 
+    <div class="hero-inner">
     <p class="eyebrow hero-eyebrow">
       {site.heroEyebrow}
       <span>·</span>
@@ -161,7 +161,7 @@ const hasHeroMedia =
       </span>
 
       <span class="hero-line hero-line-two">
-        <em>{site.heroAccent}</em>
+        <em>{site.heroAccent}</em>{' '}
         {site.heroLine2}
       </span>
     </h1>
@@ -185,6 +185,7 @@ const hasHeroMedia =
     <div class="hero-scroll">
       <span>Scroll to explore</span>
       <i></i>
+    </div>
     </div>
   </section>
 
