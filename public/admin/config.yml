@@ -465,6 +465,26 @@ collections:
             name: seoImage
             widget: image
             required: false
+          
+          - label: Featured Clients
+            name: featuredClients
+            widget: list
+            required: false
+
+            fields:
+              - label: Client Name
+                name: name
+                widget: string
+
+              - label: Client Logo
+                name: logo
+                widget: image
+                required: false
+
+              - label: Website URL
+                name: url
+                widget: string
+                required: false
 
       # -----------------------------------------------------
       # ABOUT, EXPERIENCE AND SKILLS
@@ -493,6 +513,36 @@ collections:
           - label: About Description
             name: body
             widget: text
+          
+          - label: Professional Summary
+            name: professionalSummary
+            widget: text
+
+          - label: Design Philosophy
+            name: designPhilosophy
+            widget: text
+
+          - label: Industries
+            name: industries
+            widget: list
+
+            field:
+              label: Industry
+              name: industry
+              widget: string
+
+          - label: Achievements
+            name: achievements
+            widget: list
+
+            fields:
+              - label: Title
+                name: title
+                widget: string
+
+              - label: Description
+                name: description
+                widget: text
 
           - label: Profile Image
             name: profileImage
