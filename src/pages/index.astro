@@ -331,7 +331,8 @@ const hasHeroMedia =
   </div>
 
   <!-- ABOUT PREVIEW -->
-  <section class="wrap homepage-about">
+  <section class="homepage-about-section">
+  <div class="wrap homepage-about">
     <div class="section-head">
       <p class="eyebrow">About Brian</p>
 
@@ -351,6 +352,7 @@ const hasHeroMedia =
           <span>→</span>
         </a>
       </div>
+    </div>
     </div>
   </section>
 
@@ -396,7 +398,8 @@ const hasHeroMedia =
   <!-- RESOURCES PREVIEW -->
   {
     resources.length > 0 && (
-      <section class="wrap homepage-resources">
+      <section class="homepage-resources-section">
+      <div class="wrap homepage-resources">
         <div class="section-head">
           <p class="eyebrow">Resources / Notes</p>
 
@@ -434,6 +437,7 @@ const hasHeroMedia =
           Explore all resources
           <span>→</span>
         </a>
+        </div>
       </section>
     )
   }
@@ -441,9 +445,10 @@ const hasHeroMedia =
 {
   featuredClients.length > 0 && (
     <section
-      class="wrap featured-clients"
+      class="wrap featured-clients-section"
       aria-labelledby="featured-clients-title"
     >
+    <div class="wrap featured-clients">
       <div class="featured-clients-heading">
         <p class="eyebrow">
           Selected Collaborations
@@ -500,6 +505,7 @@ const hasHeroMedia =
             )
           )
         }
+      </div>
       </div>
     </section>
   )

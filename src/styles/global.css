@@ -3930,3 +3930,81 @@ body.lightbox-open {
     transition: none;
   }
 }
+
+/* ==========================================
+   HOMEPAGE SECTION CONTRAST
+   ========================================== */
+
+.homepage-about-section,
+.homepage-resources-section {
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+  radial-gradient(
+    circle at top right,
+    rgb(249 115 22 / 6%),
+    transparent 45%
+  ),
+  linear-gradient(
+    180deg,
+    #141822,
+    #0d1016
+  );
+}
+
+.homepage-about::before,
+.homepage-resources::before {
+  content: "";
+
+  position: absolute;
+
+  top: -220px;
+  right: -220px;
+
+  width: 520px;
+  height: 520px;
+
+  border-radius: 50%;
+
+  background:
+    rgb(249 115 22 / 4%);
+
+  filter: blur(140px);
+
+  pointer-events: none;
+}
+
+
+.featured-clients-section {
+  position: relative;
+  background:
+    radial-gradient(
+      circle at bottom left,
+      rgb(249 115 22 / 5%),
+      transparent 40%
+    ),
+    #090a0d;
+}
+
+.featured-clients::before {
+  content: "";
+
+  position: absolute;
+
+  bottom: -180px;
+  left: -180px;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  background:
+    rgb(249 115 22 / 3%);
+
+  filter: blur(120px);
+
+  pointer-events: none;
+}
