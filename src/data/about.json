@@ -77,6 +77,30 @@
   ],
   "profileImage": "",
   "profileImageAlt": "Portrait of Brian Fernandes",
+  "professionalSummary": "Senior User Interface Design Engineer based in Doha, Qatar, with experience across enterprise platforms, sports analytics, digital transformation and design systems. I work across design strategy, user experience, interface design and implementation thinking.",
+  "designPhilosophy": "Great products reduce complexity. My approach combines systems thinking, usability, accessibility and engineering awareness to create digital experiences that feel clear, scalable and intuitive.",
+  "industries": [
+    "Sports & Analytics",
+    "Enterprise Platforms",
+    "Digital Transformation",
+    "Telecommunications",
+    "Education & Learning",
+    "Government Services"
+  ],
+  "achievements": [
+    {
+      "title": "Enterprise UX Leadership",
+      "description": "Led design efforts across enterprise-scale products, design systems and user experience initiatives."
+    },
+    {
+      "title": "Design Systems",
+      "description": "Created reusable component libraries and design standards supporting consistency across applications."
+    },
+    {
+      "title": "Cross-functional Delivery",
+      "description": "Collaborated closely with product owners, engineers and stakeholders to deliver digital products."
+    }
+  ],
   "title": "Curious by nature.",
   "introduction": "I design user-centered digital products that bring clarity to complex workflows."
 }

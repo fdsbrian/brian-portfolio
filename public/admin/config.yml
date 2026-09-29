@@ -96,6 +96,54 @@ collections:
         widget: string
         required: false
         hint: Describe the image for accessibility.
+      
+      - label: Project Hero Media Type
+        name: heroMediaType
+        widget: select
+        default: none
+        options:
+          - label: Use Existing Cover or Placeholder
+            value: none
+          - label: Background Image
+            value: image
+          - label: Background Video
+            value: video
+
+      - label: Project Hero Background Image
+        name: heroBackgroundImage
+        widget: image
+        required: false
+        hint: Used when Project Hero Media Type is Background Image.
+
+      - label: Project Hero Background Video
+        name: heroBackgroundVideo
+        widget: file
+        required: false
+        media_library:
+          config:
+            multiple: false
+        hint: Upload a compressed MP4 or WebM background video.
+
+      - label: Project Hero Video Poster
+        name: heroVideoPoster
+        widget: image
+        required: false
+        hint: Displayed before the project background video begins playing.
+
+      - label: Project Hero Media Alternative Text
+        name: heroMediaAlt
+        widget: string
+        required: false
+        hint: Describe meaningful media. Leave empty when the media is decorative.
+
+      - label: Project Hero Overlay Strength
+        name: heroOverlay
+        widget: number
+        value_type: int
+        min: 0
+        max: 100
+        step: 1
+        default: 58
 
       - label: Featured Project
         name: featured
@@ -319,6 +367,55 @@ collections:
             name: heroSecondaryLabel
             widget: string
 
+          - label: Hero Media Type
+            name: heroMediaType
+            widget: select
+            default: none
+            options:
+              - label: No Background Media
+                value: none
+              - label: Background Image
+                value: image
+              - label: Background Video
+                value: video
+
+          - label: Hero Background Image
+            name: heroBackgroundImage
+            widget: image
+            required: false
+            hint: Used when Hero Media Type is Background Image. Also acts as a fallback when video cannot play.
+
+          - label: Hero Background Video
+            name: heroBackgroundVideo
+            widget: file
+            required: false
+            media_library:
+              config:
+                multiple: false
+            hint: Upload a compressed MP4 or WebM background video without essential audio.
+
+          - label: Hero Video Poster
+            name: heroVideoPoster
+            widget: image
+            required: false
+            hint: Displayed while the background video loads.
+
+          - label: Hero Media Alternative Text
+            name: heroMediaAlt
+            widget: string
+            required: false
+            hint: Describe meaningful background imagery. Leave empty if the media is purely decorative.
+
+          - label: Hero Overlay Strength
+            name: heroOverlay
+            widget: number
+            value_type: int
+            min: 0
+            max: 100
+            step: 1
+            default: 62
+            hint: Higher values make the text background darker.
+
           - label: Availability
             name: availability
             widget: string
@@ -368,6 +465,26 @@ collections:
             name: seoImage
             widget: image
             required: false
+          
+          - label: Featured Clients
+            name: featuredClients
+            widget: list
+            required: false
+
+            fields:
+              - label: Client Name
+                name: name
+                widget: string
+
+              - label: Client Logo
+                name: logo
+                widget: image
+                required: false
+
+              - label: Website URL
+                name: url
+                widget: string
+                required: false
 
       # -----------------------------------------------------
       # ABOUT, EXPERIENCE AND SKILLS
@@ -396,6 +513,36 @@ collections:
           - label: About Description
             name: body
             widget: text
+          
+          - label: Professional Summary
+            name: professionalSummary
+            widget: text
+
+          - label: Design Philosophy
+            name: designPhilosophy
+            widget: text
+
+          - label: Industries
+            name: industries
+            widget: list
+
+            field:
+              label: Industry
+              name: industry
+              widget: string
+
+          - label: Achievements
+            name: achievements
+            widget: list
+
+            fields:
+              - label: Title
+                name: title
+                widget: string
+
+              - label: Description
+                name: description
+                widget: text
 
           - label: Profile Image
             name: profileImage

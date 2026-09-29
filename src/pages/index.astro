@@ -17,6 +17,9 @@ const featuredSkills = about.skills
   .filter((skill) => skill.featured)
   .slice(0, 8);
 
+const featuredClients =
+  site.featuredClients || [];
+
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -39,6 +42,40 @@ const getMediaUrl = (path?: string) => {
 
   return `${base}${cleanPath}`;
 };
+
+const heroMediaType =
+  site.heroMediaType === 'image' ||
+  site.heroMediaType === 'video'
+    ? site.heroMediaType
+    : 'none';
+
+const heroBackgroundImage = getMediaUrl(
+  site.heroBackgroundImage
+);
+
+const heroBackgroundVideo = getMediaUrl(
+  site.heroBackgroundVideo
+);
+
+const heroVideoPoster = getMediaUrl(
+  site.heroVideoPoster || site.heroBackgroundImage
+);
+
+const heroOverlay = Math.min(
+  Math.max(Number(site.heroOverlay) || 62, 0),
+  100
+);
+
+const hasHeroImage =
+  heroMediaType === 'image' &&
+  Boolean(heroBackgroundImage);
+
+const hasHeroVideo =
+  heroMediaType === 'video' &&
+  Boolean(heroBackgroundVideo);
+
+const hasHeroMedia =
+  hasHeroImage || hasHeroVideo;
 ---
 
 <Base
@@ -47,7 +84,66 @@ const getMediaUrl = (path?: string) => {
   image={site.seoImage}
 >
   <!-- HERO -->
-  <section class="wrap hero">
+  <section
+  class:list={[
+    'wrap',
+    'hero',
+    { 'hero--with-media': hasHeroMedia }
+  ]}
+  style={`--hero-overlay: ${heroOverlay / 100};`}
+  >
+
+{
+  hasHeroMedia && (
+    <div class="hero-media">
+  {
+    hasHeroVideo ? (
+      <>
+        <video
+          class="hero-media-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster={heroVideoPoster || undefined}
+        >
+          <source
+            src={heroBackgroundVideo}
+            type="video/mp4"
+          />
+        </video>
+
+        {
+          heroVideoPoster && (
+            <img
+              class="hero-media-video-fallback"
+              src={heroVideoPoster}
+              alt=""
+              loading="eager"
+              decoding="async"
+            />
+          )
+        }
+      </>
+    ) : (
+      <img
+        class="hero-media-image"
+        src={heroBackgroundImage}
+        alt={site.heroMediaAlt || ""}
+        loading="eager"
+        decoding="async"
+      />
+    )
+  }
+
+  <div class="hero-media-overlay"></div>
+</div>
+
+  )
+}
+
+
     <div class="hero-orb hero-orb-one"></div>
     <div class="hero-orb hero-orb-two"></div>
 
@@ -110,6 +206,7 @@ const getMediaUrl = (path?: string) => {
       {
         projects.map((project, index) => {
           const coverUrl = getMediaUrl(project.data.cover);
+          const projectTransitionName = `project-cover-${project.id}`;
 
           return (
             <a
@@ -132,6 +229,8 @@ const getMediaUrl = (path?: string) => {
                     <img
                       src={coverUrl}
                       alt={project.data.coverAlt || project.data.title}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
                     />
                   ) : (
                     <div class="project-placeholder">
@@ -337,4 +436,71 @@ const getMediaUrl = (path?: string) => {
       </section>
     )
   }
+
+{
+  featuredClients.length > 0 && (
+    <section
+      class="wrap featured-clients"
+      aria-labelledby="featured-clients-title"
+    >
+      <div class="featured-clients-heading">
+        <p class="eyebrow">
+          Selected Collaborations
+        </p>
+
+        <h2 id="featured-clients-title">
+          Organizations, programs and teams I've contributed to through design and digital delivery.
+        </h2>
+      </div>
+
+      <div class="featured-clients-grid">
+        {
+          featuredClients.map((client) =>
+            client.url ? (
+              <a
+                href={client.url}
+                class="featured-client"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div class="featured-client-logo">
+                  {
+                    client.logo && (
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                      />
+                    )
+                  }
+                </div>
+
+                <div class="featured-client-info">
+                  <span>{client.name}</span>
+                  <span aria-hidden="true">↗</span>
+                </div>
+              </a>
+            ) : (
+              <div class="featured-client">
+                <div class="featured-client-logo">
+                  {
+                    client.logo && (
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                      />
+                    )
+                  }
+                </div>
+
+                <div class="featured-client-info">
+                  <span>{client.name}</span>
+                </div>
+              </div>
+            )
+          )
+        }
+      </div>
+    </section>
+  )
+}
 </Base>

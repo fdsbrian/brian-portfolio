@@ -20,6 +20,14 @@ const projects = defineCollection({
     seoImage: z.string().optional(),
     cover: z.string().optional(),
     coverAlt: z.string().optional(),
+    heroMediaType: z
+      .enum(['none', 'image', 'video'])
+      .default('none'),
+    heroBackgroundImage: z.string().optional(),
+    heroBackgroundVideo: z.string().optional(),
+    heroVideoPoster: z.string().optional(),
+    heroMediaAlt: z.string().optional(),
+    heroOverlay: z.number().min(0).max(100).default(58),
     featured: z.boolean().default(false),
     order: z.number().default(0),
     challenge: z.string(),

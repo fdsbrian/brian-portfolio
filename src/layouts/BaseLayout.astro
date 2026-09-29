@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import site from '../data/site.json';
+import { ClientRouter, fade } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -20,9 +21,11 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
+const siteOrigin = Astro.site ?? Astro.url.origin;
+
 const canonicalURL = new URL(
   Astro.url.pathname,
-  Astro.site ?? Astro.url.origin
+  siteOrigin
 );
 
 const getMediaUrl = (path?: string) => {
@@ -41,14 +44,13 @@ const getMediaUrl = (path?: string) => {
 
   return new URL(
     `${base}${cleanPath}`,
-    Astro.site ?? Astro.url.origin
+    siteOrigin
   ).toString();
 };
 
 const canonicalUrlString = canonicalURL.toString();
 const socialImage = getMediaUrl(image);
-
-const homeUrl = new URL(base, Astro.site ?? Astro.url.origin).toString();
+const homeUrl = new URL(base, siteOrigin).toString();
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -75,7 +77,6 @@ const structuredData = {
     }
   ]
 };
-
 ---
 
 <!doctype html>
@@ -91,13 +92,24 @@ const structuredData = {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#090a0d" />
 
-    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
-    <link rel="manifest" href={`${base}site.webmanifest`} />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={`${base}favicon.svg`}
+    />
 
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link
+      rel="manifest"
+      href={`${base}site.webmanifest`}
+    />
+
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large"
+    />
+
     <meta name="color-scheme" content="dark" />
-
-<meta name="author" content={site.name} />
+    <meta name="author" content={site.name} />
 
     <link
       rel="canonical"
@@ -106,7 +118,6 @@ const structuredData = {
 
     <title>{title}</title>
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={site.name} />
@@ -130,7 +141,6 @@ const structuredData = {
       )
     }
 
-    <!-- Twitter -->
     <meta
       name="twitter:card"
       content="summary_large_image"
@@ -154,14 +164,17 @@ const structuredData = {
         />
       )
     }
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify(structuredData)}
-></script>
 
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    ></script>
+
+    <ClientRouter />
   </head>
 
   <body>
+
     <div
       class="progress"
       aria-hidden="true"
@@ -175,10 +188,11 @@ const structuredData = {
 
     <Footer />
 
-    <script is:inline>
-      const progress = document.querySelector('.progress');
-
+    <script>
       const updateProgress = () => {
+        const progress =
+          document.querySelector<HTMLElement>('.progress');
+
         if (!progress) return;
 
         const availableScroll =
@@ -191,8 +205,81 @@ const structuredData = {
             : 0;
 
         progress.style.transform =
-          `scaleX(${percentage})`;
+          `scaleX(${Math.min(Math.max(percentage, 0), 1)})`;
       };
+
+      const closeMobileMenu = () => {
+        const menuButton =
+          document.querySelector<HTMLButtonElement>('.menu-btn');
+
+        const mobileNavigation =
+          document.querySelector<HTMLElement>('.mobile-nav');
+
+        mobileNavigation?.classList.remove('open');
+        document.body.classList.remove('menu-open');
+
+        menuButton?.setAttribute(
+          'aria-expanded',
+          'false'
+        );
+      };
+
+      const initialiseMobileMenu = () => {
+        const menuButton =
+          document.querySelector<HTMLButtonElement>('.menu-btn');
+
+        const mobileNavigation =
+          document.querySelector<HTMLElement>('.mobile-nav');
+
+        if (
+          !menuButton ||
+          !mobileNavigation ||
+          menuButton.dataset.menuReady === 'true'
+        ) {
+          return;
+        }
+
+        menuButton.dataset.menuReady = 'true';
+
+        menuButton.addEventListener('click', () => {
+          const isOpen =
+            mobileNavigation.classList.toggle('open');
+
+          document.body.classList.toggle(
+            'menu-open',
+            isOpen
+          );
+
+          menuButton.setAttribute(
+            'aria-expanded',
+            String(isOpen)
+          );
+        });
+
+        mobileNavigation
+          .querySelectorAll<HTMLAnchorElement>('a')
+          .forEach((link) => {
+            link.addEventListener(
+              'click',
+              closeMobileMenu
+            );
+          });
+      };
+
+
+      document.addEventListener(
+        'astro:page-load',
+        () => {
+          initialiseMobileMenu();
+          updateProgress();
+        }
+      );
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeMobileMenu();
+        }
+      });
 
       window.addEventListener(
         'scroll',
@@ -206,33 +293,8 @@ const structuredData = {
         { passive: true }
       );
 
+      initialiseMobileMenu();
       updateProgress();
-
-      const menuButton =
-        document.querySelector('.menu-btn');
-
-      const mobileNavigation =
-        document.querySelector('.mobile-nav');
-
-      menuButton?.addEventListener('click', () => {
-        const isOpen =
-          mobileNavigation?.classList.toggle('open') ?? false;
-
-        menuButton.setAttribute(
-          'aria-expanded',
-          String(isOpen)
-        );
-      });
-
-      mobileNavigation?.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          mobileNavigation.classList.remove('open');
-          menuButton?.setAttribute(
-            'aria-expanded',
-            'false'
-          );
-        });
-      });
     </script>
   </body>
 </html>

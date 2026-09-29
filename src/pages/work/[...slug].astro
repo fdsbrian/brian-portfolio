@@ -64,6 +64,39 @@ return `${base}${cleanPath}`;
 };
 
 const coverUrl = getMediaUrl(project.data.cover);
+const projectMediaType =
+  project.data.heroMediaType === 'image' ||
+  project.data.heroMediaType === 'video'
+    ? project.data.heroMediaType
+    : 'none';
+
+const projectHeroImage = getMediaUrl(
+  project.data.heroBackgroundImage
+);
+
+const projectHeroVideo = getMediaUrl(
+  project.data.heroBackgroundVideo
+);
+
+const projectHeroPoster = getMediaUrl(
+  project.data.heroVideoPoster ||
+  project.data.heroBackgroundImage ||
+  project.data.cover
+);
+
+const projectTransitionName = `project-cover-${project.id}`;
+
+const hasProjectHeroImage =
+  projectMediaType === 'image' &&
+  Boolean(projectHeroImage);
+
+const hasProjectHeroVideo =
+  projectMediaType === 'video' &&
+  Boolean(projectHeroVideo);
+
+const hasProjectHeroMedia =
+  hasProjectHeroImage ||
+  hasProjectHeroVideo;
 
 const siteOrigin = Astro.site ?? Astro.url.origin;
 
@@ -125,12 +158,87 @@ const breadcrumbData = {
 ></script>
 
   <article class="case-study">
+
+<section class="case-study-visual">
+  {
+    hasProjectHeroMedia ? (
+    
+
+<figure class="case-study-cover case-study-cover--media">
+  {
+    hasProjectHeroVideo ? (
+      <>
+        <video
+          class="case-study-cover-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster={projectHeroPoster || undefined}
+        >
+          <source src={projectHeroVideo} type="video/mp4" />
+          </video>
+        {
+        projectHeroPoster && (
+          <img
+            class="case-study-cover-poster"
+            src={projectHeroPoster}
+            alt=""
+            loading="eager"
+            decoding="async"
+          />
+        )
+      }
+
+      </>
+    ) : (
+      <img
+        class="case-study-cover-poster"
+        src={projectHeroImage}
+        alt={project.data.heroMediaAlt || project.data.coverAlt || project.data.title}
+        loading="eager"
+        decoding="async"
+      />
+    )
+  }
+
+  <div class="case-study-cover-overlay"></div>
+</figure>
+
+
+    ) : coverUrl ? (
+      <figure class="case-study-cover case-study-cover--wide">
+        <img
+          src={coverUrl}
+          alt={project.data.coverAlt || project.data.title}
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+    ) : (
+      <div
+        class="case-study-cover case-study-cover-placeholder"
+        aria-label={`${project.data.title} cover placeholder`}
+      >
+        <span aria-hidden="true">
+          {String(project.data.order).padStart(2, '0')}
+        </span>
+
+        <small>{project.data.category}</small>
+      </div>
+    )
+  }
+</section>
+
     <header class="wrap case-study-header">
       <a href={`${base}#work`}>
         <span aria-hidden="true">←</span>
         Back to work
       </a>
 
+  
+  
   <div class="case-study-heading">
     <div class="case-study-heading-main">
       <p class="eyebrow">
@@ -147,7 +255,14 @@ const breadcrumbData = {
     </p>
   </div>
 
-  <dl class="case-study-facts">
+  
+</header>
+
+
+
+
+
+<dl class="case-study-facts">
     {
       project.data.industry && (
         <div>
@@ -180,38 +295,12 @@ const breadcrumbData = {
       <dd>{project.data.year}</dd>
     </div>
   </dl>
-</header>
 
-<section class="wrap case-study-visual">
-  {
-    coverUrl ? (
-      <figure class="case-study-cover">
-        <img
-          src={coverUrl}
-          alt={project.data.coverAlt || project.data.title}
-          loading="eager"
-          decoding="async"
-          >
-      </figure>
-    ) : (
-      <div
-        class="case-study-cover case-study-cover-placeholder"
-        aria-label={`${project.data.title} cover placeholder`}
-      >
-        <span aria-hidden="true">
-          {String(project.data.order).padStart(2, '0')}
-        </span>
 
-        <small>{project.data.category}</small>
-      </div>
-    )
-  }
-</section>
 
 {
   project.data.results.length > 0 && (
-    <section
-      class="wrap case-study-results"
+    <section class="wrap case-study-results"
       aria-labelledby="project-results-title"
     >
       <div class="case-study-results-heading">
