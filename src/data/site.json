@@ -1,12 +1,12 @@
 {
-  "heroLine1": "I design digital",
-  "github": "https://github.com/fdsbrian",
-  "heroAccent": "experiences",
+  "heroLine1": "Transforming complex",
+  "github": "",
+  "heroAccent": "systems",
   "heroMediaType": "image",
-  "heroLine2": "people enjoy.",
+  "heroLine2": "into clear experiences.",
   "name": "Brian Fernandes",
   "heroPrimaryLabel": "View selected work",
-  "resume": "",
+  "resume": "/brian-portfolio/uploads/brianfernandes_cv_2026.pdf",
   "heroVideoPoster": "",
   "footerEyebrow": "Have a complex idea?",
   "heroEyebrow": "Design · Technology · Experience",
@@ -21,26 +21,26 @@
     {
       "name": "Aspire Zone Foundation",
       "logo": "/brian-portfolio/uploads/azf_logo.svg",
-      "url": ""
+      "url": "https://www.aspirezone.qa"
     },
     {
-      "name": "Qatar Olympic Committee",
-      "logo": "",
-      "url": ""
+      "name": "Aspire Academy",
+      "logo": "/brian-portfolio/uploads/aspire-academy-logo.svg",
+      "url": "https://www.aspire.qa"
     },
     {
-      "name": "Qatar Stars League",
-      "logo": "",
-      "url": ""
+      "name": "Aspetar",
+      "logo": "/brian-portfolio/uploads/aspetar.svg",
+      "url": "https://www.aspetar.com"
     }
   ],
   "availability": "Available for select collaborations",
   "seoTitle": "Brian Fernandes | Senior User Interface Design Engineer",
-  "heroBody": "Bridging user experience, interface engineering and enterprise delivery to turn complex workflows into clear, elegant products.",
+  "heroBody": "Senior User Experience Designer helping organizations transform enterprise workflows, analytics platforms and digital services into intuitive user experiences.",
   "email": "brianfds@gmail.com",
   "footerTitle": "Let's make it feel beautifully simple.",
-  "linkedin": "",
+  "linkedin": "https://www.linkedin.com/in/brianfds/",
   "seoImage": "",
   "heroMediaAlt": "",
-  "seoDescription": "Portfolio of Brian Fernandes, a Senior User Interface Design Engineer specializing in enterprise products, design systems and interface engineering."
+  "seoDescription": "Portfolio of Brian Fernandes, a Senior User Interface Designer specializing in enterprise products, design systems and interface engineering."
 }

@@ -77,6 +77,54 @@ const getMediaUrl = (path: string) => {
         {about.body}
       </p>
 
+      {
+  about.professionalSummary && (
+    <div class="about-section-block">
+      <p class="eyebrow">
+        Professional Summary
+      </p>
+
+      <p class="about-summary">
+        {about.professionalSummary}
+      </p>
+    </div>
+  )
+}
+
+{
+  about.designPhilosophy && (
+    <div class="about-section-block">
+      <p class="eyebrow">
+        Design Philosophy
+      </p>
+
+      <p class="about-philosophy">
+        {about.designPhilosophy}
+      </p>
+    </div>
+  )
+}
+
+{
+  about.industries?.length > 0 && (
+    <div class="about-section-block">
+      <p class="eyebrow">
+        Industries
+      </p>
+
+      <div class="industries-grid">
+        {
+          about.industries.map((industry) => (
+            <span class="industry-chip">
+              {industry}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  )
+}
+
       <h2 class="content-heading">Experience</h2>
 
       <div class="experience-list">
@@ -230,4 +278,62 @@ const getMediaUrl = (path: string) => {
       }
     </div>
   </section>
+
+{
+  about.achievements?.length > 0 && (
+    <section class="wrap achievements-section">
+      <div class="section-head">
+        <p class="eyebrow">
+          Selected Achievements
+        </p>
+
+        <h2 class="section-title">
+          Building impact
+          <br />
+          <em>through design.</em>
+        </h2>
+      </div>
+
+      <div class="achievements-grid">
+        {
+          about.achievements.map(
+            (achievement, index) => (
+              <article class="achievement-card">
+                <span class="achievement-index">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                <h3>
+                  {achievement.title}
+                </h3>
+
+                <p class="body-copy">
+                  {achievement.description}
+                </p>
+              </article>
+            )
+          )
+        }
+      </div>
+    </section>
+  )
+}
+
+<section class="wrap about-resume-cta">
+  <div class="resume-cta-card">
+    <p class="eyebrow">
+      Résumé
+    </p>
+
+    <h2>
+      Looking for the
+      <em> complete story?</em>
+    </h2>
+
+    <a href={`${base}resume/`}>
+      Download Résumé →
+    </a>
+  </div>
+</section>
+
 </Base>
